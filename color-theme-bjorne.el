@@ -1,0 +1,54 @@
+;; All patches welcome
+
+(require 'color-theme)
+
+;;;###autoload
+(defun color-theme-bjorne ()
+  "Color theme by bjorne, based off the Blackboard theme"
+  (interactive)
+  (color-theme-install
+   '(color-theme-blackboard
+     ((background-color . "#222222")
+      (background-mode . dark)
+      (border-color . "black")
+      (cursor-color . "#A7A7A7")
+      (foreground-color . "#E8E8D8")
+      (mouse-color . "sienna1"))
+     (default ((t (:background "#222222" :foreground "#E8E8E8"))))
+     (blue ((t (:foreground "blue"))))
+     (bold ((t (:bold t))))
+     (bold-italic ((t (:bold t))))
+     (border-glyph ((t (nil))))
+     (buffers-tab ((t (:background "#0C1021" :foreground "#E8E8E8"))))
+     (mumamo-background-chunk-major ((t (:background nil))))
+     (mumamo-background-chunk-submode1 ((t (:background "#292929"))))
+     (font-lock-builtin-face ((t (:foreground "#94bff3"))))
+     (font-lock-comment-face ((t (:italic t :foreground "#AEAEAE"))))
+     (font-lock-constant-face ((t (:foreground "#D8FA3C" :italic t))))
+     (font-lock-doc-string-face ((t (:foreground "#ffff00"))))
+     (font-lock-function-name-face ((t (:foreground "#FFA400" :italic t))))
+     (font-lock-keyword-face ((t (:foreground "#DBCE2D"))))
+     (font-lock-preprocessor-face ((t (:foreground "Aquamarine"))))
+     (font-lock-reference-face ((t (:foreground "SlateBlue"))))
+
+     (font-lock-regexp-grouping-backslash ((t (:foreground "#E9C062"))))
+     (font-lock-regexp-grouping-construct ((t (:foreground "red"))))
+
+     (font-lock-string-face ((t (:foreground "#e96939" :background "#191919"))))
+     (font-lock-type-face ((t (:foreground "#8DA6CE"))))
+     (font-lock-variable-name-face ((t (:foreground "#7FC4D0"))))
+     (font-lock-warning-face ((t (:bold t :foreground "Pink"))))
+     (gui-element ((t (:background "#D4D0C8" :foreground "black"))))
+     (region ((t (:background "#253B56"))))
+     (mode-line ((t (:background "grey75" :foreground "black"))))
+     (highline-face ((t (:background "#303030"))))
+     (highlight ((t (:background "#282828"))))
+     (italic ((t (nil))))
+     (left-margin ((t (nil))))
+     (text-cursor ((t (:background "yellow" :foreground "black"))))
+     (toolbar ((t (nil))))
+     (underline ((nil (:underline t))))
+     (zmacs-region ((t (:background "snow" :foreground "ble"))))
+     )))
+
+(provide 'color-theme-bjorne)
