@@ -1,6 +1,6 @@
 ;; debugging
-(setq debug-on-error t)
-(setq debug-on-entry t)
+;; (setq debug-on-error t)
+;; (setq debug-on-entry t)
 
 ;; root dir
 (add-to-list 'load-path "~/.emacs.d")
