@@ -7,7 +7,7 @@
   "Color theme by bjorne, based off the Blackboard theme"
   (interactive)
   (color-theme-install
-   '(color-theme-blackboard
+   '(color-theme-bjorne
      ((background-color . "#222222")
       (background-mode . dark)
       (border-color . "black")
