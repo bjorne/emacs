@@ -6,6 +6,8 @@
 ;; BASIC SETUP ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;; root dir
 (add-to-list 'load-path "~/.emacs.d")
 
@@ -22,34 +24,61 @@
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (unless (require 'el-get nil t)
   (with-current-buffer
-      (url-retrieve-synchronously "https://raw.github.com/dimitri/el-get/master/el-get-install.el") (end-of-buffer) (eval-print-last-sexp)))
+      (url-retrieve-synchronously "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+    (lambda (s) (let (el-get-master-branch) (end-of-buffer) (eval-print-last-sexp)))))
 
 ;; define which el-get packages we wantz
 ;; do not install via GUI, do it here instead
 (setq my-packages
-      '(color-theme
+      '(ace-jump-mode
+        color-theme
 	el-get
 	google-maps
 	highlight-indentation
 	magit
+        mark-multiple
 	markdown-mode
 	mo-git-blame
+        nxhtml
 	rspec-mode
 	rvm
 	textmate
-	yaml-mode))
+        wrap-region
+	yaml-mode
+        yasnippet
+        zencoding-mode))
 
 ;; install packages listed above
 (el-get 'sync (append
        my-packages
        (mapcar 'el-get-source-name el-get-sources)))
 
+(require 'bjorne-defuns)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; KEY BINDINGS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(global-set-key (kbd "<f10>") 'kill-buffer)
+(global-set-key (kbd "<f11>") 'kill-buffer-and-window)
+
+(require 'ace-jump-mode)
+(global-set-key (kbd "<f5>") 'ace-jump-mode)
+(global-set-key (kbd "<f6>") 'ace-jump-word-mode)
+(global-set-key (kbd "<f7>") 'ace-jump-line-mode)
+
+(global-set-key (kbd "C-a") 'back-to-indentation-or-beginning-of-line)
+
+;; ruby interpolate string
+(add-hook 'ruby-mode-hook (lambda () (global-set-key (kbd "#") 'ruby-interpolate)))
+
+(global-set-key (kbd "C-x C-b") 'switch-to-buffer-in-project)
+
 ;; open init.el with f8
 (global-set-key (kbd "<f8>") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
+
+;; alias keyboard-quit
+(global-set-key (kbd "C-x C-g") 'keyboard-quit)
 
 ;; Switch the Cmd and Meta keys
 (set-keyboard-coding-system nil)
@@ -82,12 +111,22 @@
 ;; So good!
 (global-set-key (kbd "C-c g") 'magit-status)
 
+;; mark multiple
+(require 'mark-more-like-this)
+(global-set-key (kbd "C-<") 'mark-previous-like-this)
+(global-set-key (kbd "C->") 'mark-next-like-this)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MISC ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; wrap-region
+(wrap-region-global-mode 1)
+
 ;; unique buffer names
 (require 'uniquify)
+
+(yas/global-mode 1)
 
 ;; save cursor
 (require 'saveplace)
@@ -162,4 +201,12 @@
      (set-face-foreground 'magit-diff-add "green4")
      (set-face-foreground 'magit-diff-del "red3")))
 
-
+;; Javascript
+(setq js-indent-level 2)
+(eval-after-load 'js
+  '(progn (define-key js-mode-map (kbd ",") 'self-insert-command) ;; fixes problem with pretty function font-lock
+          (font-lock-add-keywords
+           'js-mode `(("\\(function *\\)("
+                       (0 (progn (compose-region (match-beginning 1)
+                                                 (match-end 1) "\u0192")
+                                 nil)))))))
