@@ -55,6 +55,24 @@ Otherwise point moves to beginning of line."
             )))
     (print "Need a string of numbers.")))
 
-;; (call-interactively 'close-some-windows)
+(defun toggle-quotes ()
+  "Change surrounding double quotes to single quotes, or vice versa."
+  (interactive)
+  (save-excursion
+    (when (and
+           t
+           (looking-back "\[\"\'\].+" (line-beginning-position))
+           (looking-at ".+\[\"\'\]"))
+      (save-excursion
+        (re-search-backward "\[^\\\]\[\"\'\]")
+        (forward-char)
+        (let ((replacement
+               (if (string-equal (char-to-string (char-after)) "\'") "\"" "\'")))
+          (delete-char 1)
+          (insert replacement)
+          (forward-char)
+          (re-search-forward "\[^\\\]\[\"\'\]")
+          (delete-char -1)
+          (insert replacement))))))
 
 (provide 'bjorne-defuns)
