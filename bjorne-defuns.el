@@ -56,26 +56,32 @@ Otherwise point moves to beginning of line."
     (print "Need a string of numbers.")))
 
 (defun toggle-quotes ()
-  "Change surrounding double quotes to single quotes, or vice versa.
-
-Known bugs: Single quoted string within double quoted string, or
-vice versa, will not work."
+  "Change surrounding double quotes to single quotes, or vice versa."
   (interactive)
   (save-excursion
     (when (and
-           t
-           (looking-back "\[\"\'\].+" (line-beginning-position))
-           (looking-at ".+\[\"\'\]"))
-      (save-excursion
-        (re-search-backward "\[^\\\]\[\"\'\]")
-        (forward-char)
-        (let ((replacement
-               (if (string-equal (char-to-string (char-after)) "\'") "\"" "\'")))
+           (looking-back "\\(\[\"\'\]\\).+" (line-beginning-position))
+           (looking-at (format ".+\\(%s\\)" (match-string-no-properties 1))))
+      (let* ((original (match-string-no-properties 1))
+             (replacement (if (string-equal original "\'") "\"" "\'")))
+        (save-excursion
+          (re-search-backward (format "\[^\\\]%s" original))
+          (forward-char)
           (delete-char 1)
           (insert replacement)
           (forward-char)
-          (re-search-forward "\[^\\\]\[\"\'\]")
+          (re-search-forward (format "\[^\\\]%s" original))
           (delete-char -1)
           (insert replacement))))))
+;; " hej ' hej ' "
 
 (provide 'bjorne-defuns)
+
+
+(string-match-p "o\\(...\\)" "foobar")
+(defun a ()
+  (interactive)
+  (looking-at "o\\(...\\)")
+  (print (match-string-no-properties 1)))
+
+foobarA
