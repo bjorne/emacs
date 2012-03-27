@@ -56,7 +56,10 @@ Otherwise point moves to beginning of line."
     (print "Need a string of numbers.")))
 
 (defun toggle-quotes ()
-  "Change surrounding double quotes to single quotes, or vice versa."
+  "Change surrounding double quotes to single quotes, or vice versa.
+
+Known bugs: Single quoted string within double quoted string, or
+vice versa, will not work."
   (interactive)
   (save-excursion
     (when (and
