@@ -76,12 +76,3 @@ Otherwise point moves to beginning of line."
 ;; " hej ' hej ' "
 
 (provide 'bjorne-defuns)
-
-
-(string-match-p "o\\(...\\)" "foobar")
-(defun a ()
-  (interactive)
-  (looking-at "o\\(...\\)")
-  (print (match-string-no-properties 1)))
-
-foobarA
