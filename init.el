@@ -56,3 +56,25 @@
 ;; colors!
 (require 'color-theme-bjorne)
 (color-theme-bjorne)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(css-indent-offset 2)
+ '(magit-completing-read-function (quote magit-ido-completing-read))
+ '(magit-default-tracking-name-function (quote magit-default-tracking-name-branch-only))
+ '(magit-highlight-indentation nil)
+ '(magit-highlight-trailing-whitespace t)
+ '(magit-process-popup-time 1)
+ '(magit-repo-dirs (quote ("~/Code")))
+ '(magit-repo-dirs-depth 2)
+ '(magit-set-upstream-on-push t)
+ '(magit-status-buffer-switch-function (quote switch-to-buffer)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
