@@ -101,4 +101,7 @@
 ;; ruby interpolate string
 (add-hook 'ruby-mode-hook (lambda () (global-set-key (kbd "#") 'ruby-interpolate)))
 
+;; emacsclient ftw
+(server-start)
+
 (provide 'bjorne-misc)
