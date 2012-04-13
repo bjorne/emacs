@@ -36,6 +36,9 @@
 
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
+;; Highlight current line
+(global-hl-line-mode 1)
+
 
 ;; ido-mode is like magic pixie dust!
 (ido-mode t)
@@ -104,6 +107,16 @@
 ;; yasnippets
 ;;
 
+
+;; coding hook
+(defun bjorne-coding-hook ()
+  (idle-highlight-mdoe 1)
+  )
+
+(add-hook 'js-mode-hook 'bjorne-coding-hook)
+(add-hook 'ruby-mode-hook 'bjorne-coding-hook)
+(add-hook 'markdown-mode-hook 'bjorne-coding-hook)
+(add-hook 'coffee-mode-hook 'bjorne-coding-hook)
 
 ;; emacsclient ftw
 (server-start)

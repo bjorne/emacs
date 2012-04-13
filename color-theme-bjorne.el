@@ -43,6 +43,7 @@
      (mode-line ((t (:background "grey75" :foreground "black"))))
      (highline-face ((t (:background "#303030"))))
      (highlight ((t (:background "#282828"))))
+     (idle-highlight ((t (:background "#337700"))))
      (italic ((t (nil))))
      (left-margin ((t (nil))))
      (text-cursor ((t (:background "yellow" :foreground "black"))))

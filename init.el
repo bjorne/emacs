@@ -21,14 +21,20 @@
       (url-retrieve-synchronously "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
     (lambda (s) (let (el-get-master-branch) (end-of-buffer) (eval-print-last-sexp)))))
 
+(setq el-get-sources '((:name idle-highlight-mode
+                              :type github
+                              :pkgname "nonsequitur/idle-highlight-mode")))
+
 ;; define which el-get packages we wantz
 ;; do not install via GUI, do it here instead
 (setq my-packages
       '(ace-jump-mode
+        coffee-mode
         color-theme
 	el-get
 	google-maps
 	highlight-indentation
+        idle-highlight-mode
 	magit
         mark-multiple
 	markdown-mode
