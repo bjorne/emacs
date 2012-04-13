@@ -11,6 +11,8 @@
 (global-set-key (kbd "C-x C-b") 'switch-to-buffer-in-project)
 (global-set-key (kbd "C-x M-f") 'ido-find-file-other-window)
 (global-set-key (kbd "<f8>") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
+(global-set-key (kbd "<f9>") (lambda () (interactive) (open-project "js_agent")))
+(global-set-key (kbd "<f12>") 'textmate-goto-file)
 (global-set-key (kbd "C-x C-g") 'keyboard-quit)
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "C-c g") 'magit-status)
