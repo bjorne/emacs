@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : anonymous function
+# --
+var ${1:fn} = function($2) {
+  $0
+};

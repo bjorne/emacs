@@ -101,6 +101,10 @@
 ;; ruby interpolate string
 (add-hook 'ruby-mode-hook (lambda () (global-set-key (kbd "#") 'ruby-interpolate)))
 
+;; yasnippets
+;;
+
+
 ;; emacsclient ftw
 (server-start)
 
