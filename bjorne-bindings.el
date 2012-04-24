@@ -1,3 +1,6 @@
+
+(global-set-key (kbd "C-x p") popwin:keymap)
+
 (global-set-key (kbd "<f10>") 'kill-buffer)
 (global-set-key (kbd "<f11>") 'kill-buffer-and-window)
 

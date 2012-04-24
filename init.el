@@ -31,6 +31,7 @@
       '(ace-jump-mode
         coffee-mode
         color-theme
+        drag-stuff
 	el-get
 	google-maps
 	highlight-indentation
@@ -41,6 +42,7 @@
 	mo-git-blame
         nxhtml
         paredit
+        popwin
 	rspec-mode
 	rvm
         smex
