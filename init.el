@@ -79,7 +79,8 @@
  '(magit-repo-dirs (quote ("~/Code")))
  '(magit-repo-dirs-depth 2)
  '(magit-set-upstream-on-push t)
- '(magit-status-buffer-switch-function (quote switch-to-buffer)))
+ '(magit-status-buffer-switch-function (quote switch-to-buffer))
+ '(send-mail-function (quote mailclient-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
