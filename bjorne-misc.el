@@ -1,5 +1,9 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; cua mode
+;; (cua-mode t)
+(cua-selection-mode t)
+
 ;; global modes
 (wrap-region-global-mode 1)
 (yas/global-mode 1)
