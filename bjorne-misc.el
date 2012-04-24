@@ -4,6 +4,15 @@
 ;; (cua-mode t)
 (cua-selection-mode t)
 
+;; linum colors
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(linum ((t (:inherit (shadow default) :inverse-video t :height 0.8)))))
+
+
 ;; global modes
 (wrap-region-global-mode 1)
 (yas/global-mode 1)
@@ -114,13 +123,15 @@
 
 ;; coding hook
 (defun bjorne-coding-hook ()
-  (idle-highlight-mdoe 1)
+  (linum-mode)
+  (idle-highlight-mode 1)
   )
 
 (add-hook 'js-mode-hook 'bjorne-coding-hook)
 (add-hook 'ruby-mode-hook 'bjorne-coding-hook)
 (add-hook 'markdown-mode-hook 'bjorne-coding-hook)
 (add-hook 'coffee-mode-hook 'bjorne-coding-hook)
+(add-hook 'emacs-lisp-mode-hook 'bjorne-coding-hook)
 
 ;; emacsclient ftw
 (server-start)
