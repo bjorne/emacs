@@ -43,6 +43,7 @@
         nxhtml
         paredit
         popwin
+        projectile
 	rspec-mode
 	rvm
         smex
