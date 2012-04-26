@@ -1,5 +1,10 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; mouse scrolling ftw, not
+(setq mouse-wheel-scroll-amount '(8 ((shift) . 8))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+
 ;; cua mode
 ;; (cua-mode t)
 (cua-selection-mode t)
