@@ -26,7 +26,10 @@
 
 (setq el-get-sources '((:name idle-highlight-mode
                               :type github
-                              :pkgname "nonsequitur/idle-highlight-mode")))
+                              :pkgname "nonsequitur/idle-highlight-mode")
+                       (:name lintnode
+                              :type github
+                              :pkgname "davidmiller/lintnode")))
 
 ;; define which el-get packages we wantz
 ;; do not install via GUI, do it here instead
@@ -37,8 +40,12 @@
         drag-stuff
 	el-get
 	google-maps
+        helm
 	highlight-indentation
         idle-highlight-mode
+        js-comint
+        js2-mode
+        lintnode
 	magit
         mark-multiple
 	markdown-mode
