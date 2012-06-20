@@ -5,6 +5,11 @@
 (global-unset-key (kbd "<up>"))
 (global-unset-key (kbd "<down>"))
 
+
+(global-set-key (kbd "C-<f7>") (lambda () (interactive) (window-configuration-to-register ?1)))
+(global-set-key (kbd "<f7>") (lambda () (interactive) (jump-to-register ?1)))
+(global-set-key (kbd "C-<f8>") (lambda () (interactive) (window-configuration-to-register ?2)))
+(global-set-key (kbd "<f8>") (lambda () (interactive) (jump-to-register ?2)))
 (global-set-key (kbd "C-x p") popwin:keymap)
 
 (global-set-key (kbd "<f10>") 'kill-buffer)
@@ -12,8 +17,8 @@
 
 (require 'ace-jump-mode)
 (global-set-key (kbd "<f5>") 'ace-jump-mode)
-(global-set-key (kbd "<f6>") 'ace-jump-word-mode)
-(global-set-key (kbd "<f7>") 'ace-jump-line-mode)
+;; (global-set-key (kbd "<f6>") 'ace-jump-word-mode)
+;; (global-set-key (kbd "<f7>") 'ace-jump-line-mode)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-c q") 'join-line)
 (global-set-key (kbd "C-a") 'back-to-indentation-or-beginning-of-line)
@@ -25,6 +30,7 @@
 (global-set-key (kbd "C-x C-g") 'keyboard-quit)
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "C-c g") 'magit-status)
+(global-set-key (kbd "C-c b") 'magit-blame-mode)
 (global-set-key (kbd "C-z") 'undo)
 ;; zoom
 (global-set-key (kbd "C-+") 'text-scale-increase)
