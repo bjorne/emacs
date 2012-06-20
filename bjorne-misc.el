@@ -141,6 +141,21 @@
 (setq projectile-enable-caching t)
 (add-to-list 'projectile-ignored-files ".DS_Store")
 (add-to-list 'projectile-ignored-directories "node_modules")
+
+
+;; ;; jslinting
+;; (require 'flymake-jslint)
+;; ;; Make sure we can find the lintnode executable
+;; (setq lintnode-location "~/.emacs.d/el-get/lintnode")
+;; (setq lintnode-node-program "/usr/local/bin/node")
+;; (setq lintnode-autostart t)
+;; (setq lintnode-jslint-excludes (list 'onevar))
+
+;; (add-hook 'js-mode-hook
+;;           (lambda ()
+;;             (lintnode-hook)))
+
+
 ;; coding hook
 (defun bjorne-coding-hook ()
   (linum-mode)
