@@ -145,6 +145,7 @@
 (defun bjorne-coding-hook ()
   (linum-mode)
   (idle-highlight-mode 1)
+  (subword-mode)
   )
 
 (add-hook 'js-mode-hook 'bjorne-coding-hook)
