@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+#name : anonymous function closure with returned function
+# --
+(function() {
+  ${1:state}
+  return function(${2:args}) {
+    $0
+  };
+})()

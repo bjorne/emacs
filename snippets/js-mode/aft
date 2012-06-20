@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : afterEach block
+# --
+afterEach(function() {
+  $0
+});

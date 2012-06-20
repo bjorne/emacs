@@ -1,0 +1,4 @@
+# -*- mode: snippet -*-
+#name : or equal
+# --
+${1:options} = $1 || ${0:"{}"}

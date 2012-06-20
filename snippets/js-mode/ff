@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : anonymous function closure
+# --
+(function($1) {
+  $0
+})()
