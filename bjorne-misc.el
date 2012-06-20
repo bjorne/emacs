@@ -102,6 +102,7 @@
   '(progn
      (set-face-foreground 'magit-diff-add "green4")
      (set-face-foreground 'magit-diff-del "red3")))
+(require 'magit-blame)
 
 ;; from starter kit
 ;; Hippie expand: at times perhaps too hip
