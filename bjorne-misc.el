@@ -18,6 +18,8 @@
  '(linum ((t (:inherit (shadow default) :inverse-video t :height 0.8)))))
 
 
+(setq locate-make-command-line (lambda (s) `("mdfind" "-name" ,s)))
+
 ;; global modes
 (wrap-region-global-mode 1)
 (yas/global-mode 1)
