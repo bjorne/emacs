@@ -82,6 +82,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(css-indent-offset 2)
+ '(js2-basic-offset 2)
+ '(js2-mirror-mode t)
+ '(lintnode-port 3000)
  '(magit-completing-read-function (quote magit-ido-completing-read))
  '(magit-default-tracking-name-function (quote magit-default-tracking-name-branch-only))
  '(magit-highlight-indentation nil)
