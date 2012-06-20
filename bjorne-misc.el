@@ -158,4 +158,7 @@
 ;; emacsclient ftw
 (server-start)
 
+;; coffee tab width 2
+(setq coffee-tab-width 2)
+
 (provide 'bjorne-misc)
