@@ -148,6 +148,7 @@
   (subword-mode)
   )
 
+(add-hook 'js2-mode-hook 'bjorne-coding-hook)
 (add-hook 'js-mode-hook 'bjorne-coding-hook)
 (add-hook 'ruby-mode-hook 'bjorne-coding-hook)
 (add-hook 'markdown-mode-hook 'bjorne-coding-hook)
