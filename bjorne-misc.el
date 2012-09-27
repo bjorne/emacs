@@ -158,6 +158,7 @@
 
 ;; coding hook
 (defun bjorne-coding-hook ()
+  (auto-fill-mode 0)
   (linum-mode)
   (idle-highlight-mode 1)
   (subword-mode)
@@ -189,4 +190,8 @@
                        (replace-regexp-in-string ".*1G\.\.\..*5G" "..."
                                                  (replace-regexp-in-string ".*1G.*3G" "&gt;" output))))))
 
+(defun coffee-newline ()
+  (local-set-key (kbd "C-j") 'coffee-newline-and-indent))
+
+(add-hook 'coffee-mode-hook 'coffee-newline)
 (provide 'bjorne-misc)
