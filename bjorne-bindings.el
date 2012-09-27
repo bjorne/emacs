@@ -49,6 +49,8 @@
 (global-set-key (kbd "C->") 'mark-next-like-this)
 (global-set-key (kbd "C-'") 'toggle-quotes)
 
+(global-set-key (kbd "§") 'yas/expand)
+
 ;; Switch the Cmd and Meta keys
 (set-keyboard-coding-system nil)
 (setq mac-option-key-is-meta nil)
