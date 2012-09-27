@@ -1,3 +1,5 @@
+(global-unset-key (kbd "C-x C-c"))
+
 (global-unset-key (kbd "M-<left>"))
 (global-unset-key (kbd "M-<right>"))
 (global-unset-key (kbd "<left>"))
