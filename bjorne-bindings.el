@@ -65,4 +65,6 @@
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "M-O") 'other-window-backwards)
 
+(global-set-key (kbd "C-<tab>") 'indent-as-previous)
+
 (provide 'bjorne-bindings)
