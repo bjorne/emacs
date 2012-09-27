@@ -194,4 +194,34 @@
   (local-set-key (kbd "C-j") 'coffee-newline-and-indent))
 
 (add-hook 'coffee-mode-hook 'coffee-newline)
+
+(defun indent-from-previous (diff)
+  (interactive)
+  (let ((target-column
+         (save-excursion
+           (goto-char (line-beginning-position))
+           (re-search-backward "\[^\s\n\]")
+           (back-to-indentation)
+           (current-column)))
+        (current-column (save-excursion
+                          (back-to-indentation)))
+    (let ((beg (region-beginning)) (end (region-end)))
+      (unless (region-active-p)
+          (setq beg (line-beginning-position)
+                end (line-end-position)))
+      (indent-region beg end (+ column (or diff 0)))))))
+
+
+(defun indent-as-previous ()
+  (interactive)
+  (indent-from-previous 0))
+
+(defun indent-more-than-previous ()
+  (interactive)
+  (indent-from-previous 2))
+
+(defun indent-less-than-previous ()
+  (interactive)
+  (indent-from-previous -2))
+
 (provide 'bjorne-misc)
