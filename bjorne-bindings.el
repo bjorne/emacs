@@ -58,4 +58,11 @@
 
 (windmove-default-keybindings) ;; Shift+direction
 
+(defun other-window-backwards ()
+  (interactive)
+  (select-window (previous-window)))
+
+(global-set-key (kbd "M-o") 'other-window)
+(global-set-key (kbd "M-O") 'other-window-backwards)
+
 (provide 'bjorne-bindings)
