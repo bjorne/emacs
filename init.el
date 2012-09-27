@@ -6,6 +6,10 @@
 ;; BASIC SETUP ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; PATH
+(setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
 ;; root dir
 (setq bjorne-root "~/.emacs.d/")
 (add-to-list 'load-path bjorne-root)
