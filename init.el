@@ -33,7 +33,15 @@
                               :pkgname "nonsequitur/idle-highlight-mode")
                        (:name lintnode
                               :type github
-                              :pkgname "davidmiller/lintnode")))
+                              :pkgname "davidmiller/lintnode")
+                       (:name ess
+                              :description "Emacs Speaks Statistics: statistical programming within Emacs"
+                              :type github
+                              :pkgname "emacs-ess/ESS"
+                              :info "doc/info/"
+                              :build (\` (\, (mapcar (lambda (target) (concat "make " target " EMACS=" el-get-emacs)) (quote ("clean" "all")))))
+                              :load-path ("lisp")
+                              :features ess-site)))
 
 ;; define which el-get packages we wantz
 ;; do not install via GUI, do it here instead
@@ -43,6 +51,7 @@
         color-theme
         drag-stuff
 	el-get
+        ess
 	google-maps
         helm
 	highlight-indentation
