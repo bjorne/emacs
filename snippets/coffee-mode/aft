@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+#name : afterEach block
+# --
+afterEach ->
+  $0

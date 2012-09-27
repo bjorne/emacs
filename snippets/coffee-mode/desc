@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+#name : describe block
+# --
+describe '$1', ->
+  $0

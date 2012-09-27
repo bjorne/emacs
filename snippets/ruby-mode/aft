@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : after block
+# --
+after ${1:$$(yas/choose-value '("" ":each " ":all "))}do
+  $0
+end

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : it block
+# --
+it '$1' do
+  $0
+end
