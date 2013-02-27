@@ -8,13 +8,13 @@
   (interactive)
   (color-theme-install
    '(color-theme-bjorne
-     ((background-color . "#222222")
+     ((background-color . "#1c1c1c")
       (background-mode . dark)
       (border-color . "black")
       (cursor-color . "#A7A7A7")
       (foreground-color . "#E8E8D8")
       (mouse-color . "sienna1"))
-     (default ((t (:background "#222222" :foreground "#E8E8E8"))))
+     (default ((t (:background "#1c1c1c" :foreground "#E8E8E8"))))
      (blue ((t (:foreground "blue"))))
      (bold ((t (:bold t))))
      (bold-italic ((t (:bold t))))
