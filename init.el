@@ -57,32 +57,32 @@
         coffee-mode
         color-theme
         drag-stuff
-	el-get
+        el-get
         ess
         expand-region
-	google-maps
+        google-maps
         haml-mode
-;;        helm
-	highlight-indentation
+        ;; helm
+        highlight-indentation
         idle-highlight-mode
         js-comint
         js2-mode
-;;        lintnode
-	magit
+        ;; lintnode
+        magit
         mark-multiple
-	markdown-mode
-	mo-git-blame
-;;        nxhtml
+        markdown-mode
+        mo-git-blame
+        ;; nxhtml
         paredit
-;;        popwin
+        ;; popwin
         projectile
-	rspec-mode
-	rvm
+        rspec-mode
+        rvm
         smex
-	s
-	textmate
+        s
+        textmate
         wrap-region
-	yaml-mode
+        yaml-mode
         yasnippet
         zencoding-mode))
 
