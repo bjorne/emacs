@@ -162,6 +162,7 @@
   (linum-mode)
   (idle-highlight-mode 1)
   (subword-mode)
+  (whitespace-mode)
   )
 
 (add-hook 'js2-mode-hook 'bjorne-coding-hook)
