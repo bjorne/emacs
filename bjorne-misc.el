@@ -139,8 +139,8 @@
 ;; projectile
 (projectile-global-mode) ;; to enable in all buffers
 (setq projectile-enable-caching t)
-(add-to-list 'projectile-ignored-files ".DS_Store")
-(add-to-list 'projectile-ignored-directories "node_modules")
+;; (add-to-list 'projectile-ignored-files ".DS_Store")
+;; (add-to-list 'projectile-ignored-directories "node_modules")
 
 
 ;; ;; jslinting
