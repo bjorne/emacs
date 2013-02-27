@@ -14,6 +14,7 @@
 (setq bjorne-root "~/.emacs.d/")
 (add-to-list 'load-path bjorne-root)
 (add-to-list 'load-path (concat bjorne-root "vendor/"))
+(add-to-list 'load-path (concat bjorne-root "el-get/el-get/"))
 
 ;; Turn off mouse interface early in startup to avoid momentary display
 (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
@@ -26,27 +27,19 @@
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 ;; el-get setup and install (if not)
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(unless (require 'el-get nil t)
+(setq el-get-install-skip-emacswiki-recipes t)
+(unless (require 'el-get nil 'noerror)
   (with-current-buffer
-      (url-retrieve "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-                    (lambda (s)
-                      (let (el-get-master-branch)
-                        (end-of-buffer)
-                        (eval-print-last-sexp))))))
+      (url-retrieve-synchronously
+       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+    (let (el-get-master-branch)
+      (goto-char (point-max))
+      (eval-print-last-sexp))))
 
-(setq el-get-sources '((:name idle-highlight-mode
-                              :type github
-                              :pkgname "nonsequitur/idle-highlight-mode")
-                       (:name lintnode
-                              :type github
-                              :pkgname "davidmiller/lintnode")
-                       (:name s.el
-                              :type github
-                              :pkgname "magnars/s.el")
-                       (:name dash.el
-                              :type github
-                              :pkgname "magnars/dash.el")
+(setq el-get-sources '(
+;;                        (:name lintnode
+;;                               :type github
+;;                               :pkgname "davidmiller/lintnode")
                        (:name ess
                               :description "Emacs Speaks Statistics: statistical programming within Emacs"
                               :type github
@@ -69,29 +62,31 @@
         expand-region
 	google-maps
         haml-mode
-        helm
+;;        helm
 	highlight-indentation
         idle-highlight-mode
         js-comint
         js2-mode
-        lintnode
+;;        lintnode
 	magit
         mark-multiple
 	markdown-mode
 	mo-git-blame
-        nxhtml
+;;        nxhtml
         paredit
-        popwin
+;;        popwin
         projectile
 	rspec-mode
 	rvm
         smex
-	s.el
+	s
 	textmate
         wrap-region
 	yaml-mode
         yasnippet
         zencoding-mode))
+
+(setq el-get-user-package-directory "~/.emacs.d/el-get-init")
 
 ;; install packages listed above
 (el-get 'sync (append
@@ -105,6 +100,8 @@
 ;; colors!
 (require 'color-theme-bjorne)
 (color-theme-bjorne)
+
+(setq whitespace-style (quote (face tabs empty trailing)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -126,10 +123,8 @@
  '(magit-repo-dirs-depth 2)
  '(magit-set-upstream-on-push t)
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
- '(safe-global-variable-values (quote ((eval ignore-errors "Write-contents-functions is a buffer-global alternative to before-save-hook" (add-hook (quote write-contents-functions) (lambda nil (delete-trailing-whitespace) nil)) (require (quote whitespace)) "Sometimes the mode needs to be toggled off and on." (whitespace-mode 0) (whitespace-mode 1)) (whitespace-line-column . 80) (whitespace-style face trailing lines-tail) (require-final-newline . t))))
  '(send-mail-function (quote mailclient-send-it))
-;;  '(yas/fallback-behavior (quote call-other-command))
- '(yas/prompt-functions (quote (yas/ido-prompt yas/x-prompt yas/dropdown-prompt yas/completing-prompt yas/ido-prompt yas/no-prompt)))
+ '(yas-prompt-functions (quote (yas/ido-prompt yas/x-prompt yas/dropdown-prompt yas/completing-prompt yas/ido-prompt yas/no-prompt)))
  '(yas/trigger-key nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

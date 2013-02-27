@@ -12,7 +12,7 @@
 (global-set-key (kbd "<f7>") (lambda () (interactive) (jump-to-register ?1)))
 (global-set-key (kbd "C-<f8>") (lambda () (interactive) (window-configuration-to-register ?2)))
 (global-set-key (kbd "<f8>") (lambda () (interactive) (jump-to-register ?2)))
-(global-set-key (kbd "C-x p") popwin:keymap)
+;; (global-set-key (kbd "C-x p") popwin:keymap)
 
 (global-set-key (kbd "<f10>") 'kill-buffer)
 (global-set-key (kbd "<f11>") 'kill-buffer-and-window)
