@@ -50,6 +50,7 @@
 (global-set-key (kbd "C-'") 'toggle-quotes)
 
 (global-set-key (kbd "§") 'yas/expand)
+(global-set-key (kbd "C-=") 'expand-region)
 
 ;; Switch the Cmd and Meta keys
 (set-keyboard-coding-system nil)
