@@ -35,6 +35,12 @@
                        (:name lintnode
                               :type github
                               :pkgname "davidmiller/lintnode")
+                       (:name s.el
+                              :type github
+                              :pkgname "magnars/s.el")
+                       (:name dash.el
+                              :type github
+                              :pkgname "magnars/dash.el")
                        (:name ess
                               :description "Emacs Speaks Statistics: statistical programming within Emacs"
                               :type github
@@ -48,12 +54,15 @@
 ;; do not install via GUI, do it here instead
 (setq my-packages
       '(ace-jump-mode
+        ;; ack-and-a-half
         coffee-mode
         color-theme
         drag-stuff
 	el-get
         ess
+        expand-region
 	google-maps
+        haml-mode
         helm
 	highlight-indentation
         idle-highlight-mode
@@ -71,6 +80,7 @@
 	rspec-mode
 	rvm
         smex
+	s.el
 	textmate
         wrap-region
 	yaml-mode
