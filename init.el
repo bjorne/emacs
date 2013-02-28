@@ -136,5 +136,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(linum ((t (:inherit (shadow default) :inverse-video t :height 0.8)))))
+ '(linum ((t (:inherit (shadow default) :inverse-video t :height 0.8))))
+ '(magit-branch ((t (:inherit magit-header :background "chartreuse4")))))
 (put 'narrow-to-region 'disabled nil)
