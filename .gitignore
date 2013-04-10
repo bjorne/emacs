@@ -4,3 +4,6 @@ places
 /.smex-items
 /tramp
 elpa/
+/backups
+/projectile.cache
+/auto-save-list
