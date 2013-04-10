@@ -7,6 +7,10 @@
 (global-unset-key (kbd "<up>"))
 (global-unset-key (kbd "<down>"))
 
+;; drag stuff
+(global-set-key (kbd "M-n") 'drag-stuff-down)
+(global-set-key (kbd "M-p") 'drag-stuff-up)
+
 
 (global-set-key (kbd "C-<f7>") (lambda () (interactive) (window-configuration-to-register ?1)))
 (global-set-key (kbd "<f7>") (lambda () (interactive) (jump-to-register ?1)))

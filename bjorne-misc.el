@@ -225,4 +225,6 @@
   (interactive)
   (indent-from-previous -2))
 
+
+(drag-stuff-global-mode 1)
 (provide 'bjorne-misc)
