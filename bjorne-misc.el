@@ -241,7 +241,7 @@
 (set-face-attribute 'mode-line-inactive nil :box nil)
 (set-face-background 'powerline-inactive1 "gray22")
 (set-face-background 'powerline-inactive2 "gray11")
-(powerline-default)
+(powerline-default-theme)
 
 (drag-stuff-global-mode 1)
 

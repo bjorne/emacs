@@ -35,3 +35,4 @@
 (depends-on "zencoding-mode")
 (depends-on "carton")
 (depends-on "pallet")
+(depends-on "powerline")
