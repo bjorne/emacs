@@ -27,6 +27,7 @@
 
 ;; global modes
 (wrap-region-global-mode 1)
+(require 'yasnippet)
 (yas/global-mode 1)
 
 (require 'mark-more-like-this)
@@ -230,6 +231,21 @@
   (interactive)
   (indent-from-previous -2))
 
+;; TODO Move this stuff to color theme
+(set-face-background 'powerline-active1 "gray18")
+(set-face-background 'powerline-active2 "DarkGreen")
+(set-face-foreground 'powerline-active1 "white")
+(set-face-foreground 'powerline-active2 "white")
+(set-face-background 'mode-line "ForestGreen")
+(set-face-foreground 'mode-line "white")
+(set-face-attribute 'mode-line-inactive nil :box nil)
+(set-face-background 'powerline-inactive1 "gray22")
+(set-face-background 'powerline-inactive2 "gray11")
+(powerline-default)
 
 (drag-stuff-global-mode 1)
+
+;; dont ping machines ffs
+(setq ffap-machine-p-known 'reject)
+
 (provide 'bjorne-misc)
