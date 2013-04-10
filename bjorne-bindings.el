@@ -12,6 +12,13 @@
 (global-set-key (kbd "M-p") 'drag-stuff-up)
 
 
+(global-set-key (kbd "C-n") 'next-line)
+(global-set-key (kbd "C-p") 'previous-line)
+(global-set-key (kbd "C-S-n") (lambda () (interactive) (next-line) (scroll-up 1)))
+(global-set-key (kbd "C-S-p") (lambda () (interactive) (previous-line) (scroll-down 1)))
+(global-set-key (kbd "M-N") (lambda () (interactive) (next-line 5) (scroll-up 5)))
+(global-set-key (kbd "M-P") (lambda () (interactive) (previous-line 5) (scroll-down 5)))
+
 (global-set-key (kbd "C-<f7>") (lambda () (interactive) (window-configuration-to-register ?1)))
 (global-set-key (kbd "<f7>") (lambda () (interactive) (jump-to-register ?1)))
 (global-set-key (kbd "C-<f8>") (lambda () (interactive) (window-configuration-to-register ?2)))
