@@ -63,6 +63,8 @@
 (global-set-key (kbd "§") 'yas/expand)
 (global-set-key (kbd "C-=") 'expand-region)
 
+(global-set-key (kbd "s-/") 'comment-or-uncomment-current-line-or-region)
+
 ;; Switch the Cmd and Meta keys
 (set-keyboard-coding-system nil)
 (setq mac-option-key-is-meta nil)

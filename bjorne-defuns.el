@@ -121,6 +121,16 @@ it)"
   (set (make-local-variable 'post-command-hook)
        (cons 'show-fly-err-at-point post-command-hook)))
 
-
+(defun comment-or-uncomment-current-line-or-region ()
+  "Comments or uncomments current current line or whole lines in region."
+  (interactive)
+  (let (min max)
+    (if (or (region-active-p) (eq last-command 'comment-or-uncomment-current-line-or-region))
+        (comment-or-uncomment-region (region-beginning) (region-end))
+      (progn
+        (goto-char (line-beginning-position))
+        (push-mark)
+        (goto-char (line-end-position))
+        (comment-or-uncomment-region (region-beginning) (region-end))))))
 
 (provide 'bjorne-defuns)
