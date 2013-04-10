@@ -1,3 +1,8 @@
+(add-to-list 'auto-mode-alist '("Carton" . emacs-lisp-mode))
+(add-to-list 'auto-mode-alist '("\\.js" . js2-mode))
+(dolist (regex '("\\.rake$" "\\.gemspec$" "\\.ru$" "Rakefile$" "Gemfile$" "Capfile$" "Guardfile$"))
+  (add-to-list 'auto-mode-alist `(,regex . ruby-mode)))
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; mouse scrolling ftw, not
