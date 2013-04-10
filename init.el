@@ -47,7 +47,10 @@
                               :info "doc/info/"
                               :build (\` (\, (mapcar (lambda (target) (concat "make " target " EMACS=" el-get-emacs)) (quote ("clean" "all")))))
                               :load-path ("lisp")
-                              :features ess-site)))
+                              :features ess-site)
+                       (:name magit-gh-pulls
+                              :type github
+                              :pkgname "sigma/magit-gh-pulls")))
 
 ;; define which el-get packages we wantz
 ;; do not install via GUI, do it here instead
@@ -60,6 +63,8 @@
         el-get
         ess
         expand-region
+        magit-gh-pulls
+        gist
         google-maps
         haml-mode
         ;; helm
