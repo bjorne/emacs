@@ -69,7 +69,9 @@
 
 
 ;; ido-mode is like magic pixie dust!
+(require 'ido-hacks)
 (ido-mode t)
+(ido-everywhere)
 ;; (ido-ubiquitous t) ?
 (setq ido-enable-prefix nil
       ido-enable-flex-matching t
@@ -79,6 +81,17 @@
       ido-use-virtual-buffers t
       ido-handle-duplicate-virtual-buffers 2
       ido-max-prospects 10)
+
+
+;; Display ido results vertically, rather than horizontally
+(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+
+(defun ido-disable-line-truncation () (set (make-local-variable 'truncate-lines) nil))
+(add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-truncation)
+(defun ido-define-keys () ;; C-n/p is more intuitive in vertical layout
+  (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+  (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
+(add-hook 'ido-setup-hook 'ido-define-keys)
 
 (setq smex-save-file (concat bjorne-root ".smex-items"))
 (smex-initialize)
