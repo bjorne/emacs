@@ -30,8 +30,9 @@
 
 (require 'ace-jump-mode)
 (global-set-key (kbd "<f5>") 'ace-jump-mode)
-;; (global-set-key (kbd "<f6>") 'ace-jump-word-mode)
-;; (global-set-key (kbd "<f7>") 'ace-jump-line-mode)
+(global-set-key (kbd "M-h") 'ace-jump-mode)
+(global-set-key (kbd "<f6>") 'ace-jump-word-mode)
+(global-set-key (kbd "<f7>") 'ace-jump-line-mode)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-c q") 'join-line)
 (global-set-key (kbd "C-a") 'back-to-indentation-or-beginning-of-line)
@@ -64,6 +65,9 @@
 (global-set-key (kbd "C-=") 'expand-region)
 
 (global-set-key (kbd "s-/") 'comment-or-uncomment-current-line-or-region)
+
+;; custom commands
+(global-set-key (kbd "C-c e s") 'scratch)
 
 ;; Switch the Cmd and Meta keys
 (set-keyboard-coding-system nil)
