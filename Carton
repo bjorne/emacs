@@ -14,6 +14,7 @@
 (depends-on "haml-mode")
 (depends-on "highlight-indentation")
 (depends-on "idle-highlight-mode")
+(depends-on "ido-hacks")
 (depends-on "js-comint")
 (depends-on "js2-mode")
 (depends-on "logito")
