@@ -263,4 +263,12 @@
 ;; dont ping machines ffs
 (setq ffap-machine-p-known 'reject)
 
+(org-babel-do-load-languages
+      'org-babel-load-languages
+      '((emacs-lisp . t)
+        (R . t)
+        (ruby . t)
+        (perl . t)
+        (python .t)))
+
 (provide 'bjorne-misc)
