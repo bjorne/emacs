@@ -21,10 +21,14 @@
     (when (fboundp mode) (funcall mode -1)))
 
 ;; melpa setup
-(require 'package)
-(package-initialize)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;; (require 'package)
+;; (package-initialize)
+;; (add-to-list 'package-archives
+;;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(require 'cask "~/.cask/cask.el")
+(cask-initialize)
+(require 'pallet)
+
 
 (require 'bjorne-defuns)
 (require 'bjorne-misc)

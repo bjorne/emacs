@@ -1,5 +1,5 @@
-(source "melpa" "http://melpa.milkbox.net/packages/")
-(source "gnu" "http://elpa.gnu.org/packages/")
+(source melpa)
+(source gnu)
 
 (depends-on "ace-jump-mode")
 (depends-on "coffee-mode")
@@ -34,6 +34,6 @@
 (depends-on "yaml-mode")
 (depends-on "yasnippet")
 (depends-on "zencoding-mode")
-(depends-on "carton")
+(depends-on "cask")
 (depends-on "pallet")
 (depends-on "powerline")
