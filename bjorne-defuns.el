@@ -133,6 +133,16 @@ it)"
         (goto-char (line-end-position))
         (comment-or-uncomment-region (region-beginning) (region-end))))))
 
+(defun coffee-to-js ()
+  "Convert a coffee script region to javascript"
+  (interactive)
+  (shell-command-on-region (region-beginning) (region-end) "coffee -p -s -b" nil t))
+
+(defun js-to-coffee ()
+  "Convert a javascript region to coffee script"
+  (interactive)
+  (shell-command-on-region (region-beginning) (region-end) "js2coffee" nil t))
+
 (defun projectile-toggle-test-code ()
   "Jump between test and implementation"
     (interactive)
