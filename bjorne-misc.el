@@ -67,7 +67,7 @@
 ;; Highlight current line
 (global-hl-line-mode 1)
 
-
+(require 'dired-x)
 ;; ido-mode is like magic pixie dust!
 (require 'ido-hacks)
 (ido-mode t)
