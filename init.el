@@ -8,13 +8,11 @@
 
 ;; PATH
 (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
-(setq exec-path (append exec-path '("/usr/local/bin")))
 
 ;; root dir
 (setq bjorne-root "~/.emacs.d/")
 (add-to-list 'load-path bjorne-root)
 (add-to-list 'load-path (concat bjorne-root "vendor/"))
-(add-to-list 'load-path (concat bjorne-root "el-get/el-get/"))
 
 ;; Turn off mouse interface early in startup to avoid momentary display
 (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
