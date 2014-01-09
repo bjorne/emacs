@@ -27,6 +27,8 @@
 (cask-initialize)
 (require 'pallet)
 
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
 
 (require 'bjorne-defuns)
 (require 'bjorne-misc)
