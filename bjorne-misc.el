@@ -162,7 +162,9 @@
 ;; projectile
 (projectile-global-mode) ;; to enable in all buffers
 (setq projectile-enable-caching t)
-;; (add-to-list 'projectile-ignored-files ".DS_Store")
+(add-to-list 'projectile-globally-ignored-files ".DS_Store")
+(add-to-list 'projectile-globally-ignored-files "*.min.js*")
+(setq ag-arguments '("--smart-case" "--nogroup" "--column" "--ignore-dir=node_modules" "--ignore-dir=.cask" "--ignore-dir=backups" "--ignore-dir=tmp" "--ignore=projectile.cache" "--"))
 ;; (add-to-list 'projectile-ignored-directories "node_modules")
 
 

@@ -133,4 +133,29 @@ it)"
         (goto-char (line-end-position))
         (comment-or-uncomment-region (region-beginning) (region-end))))))
 
+(defun projectile-toggle-test-code ()
+  "Jump between test and implementation"
+    (interactive)
+    (when (buffer-file-name)
+      (let ((lib-matches
+             (s-match
+              "agency\\/lib\/\\(.+\\)\\/\\(.+\\)\\.coffee$"
+              (buffer-file-name)))
+            (spec-matches
+             (s-match
+              "agency\\/test\\/unit\/\\(.+\\)\\/\\(.+\\)\\.spec\\.coffee$"
+              (buffer-file-name))))
+        (cond (lib-matches
+               (find-file
+                (format
+                 "/Users/bjorne/Code/agency/test/unit/%s/%s.spec.coffee"
+                 (nth 1 lib-matches)
+                 (nth 2 lib-matches))))
+              (spec-matches
+               (find-file
+                (format
+                 "/Users/bjorne/Code/agency/lib/%s/%s.coffee"
+                 (nth 1 spec-matches)
+                 (nth 2 spec-matches))))))))
+
 (provide 'bjorne-defuns)

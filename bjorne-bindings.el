@@ -81,6 +81,8 @@
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
 
+(define-key projectile-mode-map (kbd "C-c p t") 'projectile-toggle-test-code)
+(define-key projectile-mode-map (kbd "C-c p g") 'ag-project)
 (windmove-default-keybindings) ;; Shift+direction
 
 (defun other-window-backwards ()
