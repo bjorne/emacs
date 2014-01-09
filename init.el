@@ -69,3 +69,4 @@
  '(linum ((t (:inherit (shadow default) :inverse-video t :height 0.8))))
  '(magit-branch ((t (:inherit magit-header :background "chartreuse4")))))
 (put 'narrow-to-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
