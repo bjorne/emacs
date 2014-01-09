@@ -9,6 +9,9 @@
 ;; PATH
 (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
 
+;; Start in $HOME
+(setq default-directory (getenv "HOME"))
+
 ;; root dir
 (setq bjorne-root "~/.emacs.d/")
 (add-to-list 'load-path bjorne-root)
