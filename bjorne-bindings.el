@@ -1,4 +1,9 @@
-(global-unset-key (kbd "C-x C-c"))
+(global-set-key
+ (kbd "C-x C-c")
+ (lambda ()
+   (interactive)
+   (if (y-or-n-p "Quit Emacs? ")
+       (save-buffers-kill-emacs))))
 
 (global-unset-key (kbd "M-<left>"))
 (global-unset-key (kbd "M-<right>"))
