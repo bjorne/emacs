@@ -119,6 +119,7 @@
      (set-face-foreground 'diff-added "green4")
      (set-face-foreground 'diff-removed "red3")))
 
+(setq magit-emacsclient-executable "/usr/local/bin/emacsclient")
 (eval-after-load 'magit
   '(progn
      (set-face-foreground 'magit-diff-add "green4")
