@@ -21,6 +21,11 @@
 (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
     (when (fboundp mode) (funcall mode -1)))
 
+;; well i got hacked one day...
+;; (add-hook 'find-file-hook 'zone)
+;; (setq counter 0)
+;; (add-hook 'find-file-hook (lambda () (when (= (% counter 50) 0) (zone))))
+
 ;; melpa setup
 ;; (require 'package)
 ;; (package-initialize)
@@ -64,7 +69,9 @@
  '(magit-set-upstream-on-push t)
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(send-mail-function (quote mailclient-send-it))
- '(yas-prompt-functions (quote (yas/ido-prompt yas/x-prompt yas/dropdown-prompt yas/completing-prompt yas/ido-prompt yas/no-prompt)))
+ '(yas-prompt-functions
+   (quote
+    (yas/ido-prompt yas/x-prompt yas/dropdown-prompt yas/completing-prompt yas/ido-prompt yas/no-prompt)))
  '(yas/trigger-key nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -72,6 +79,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(linum ((t (:inherit (shadow default) :inverse-video t :height 0.8))))
- '(magit-branch ((t (:inherit magit-header :background "chartreuse4")))))
+ '(secondary-selection ((t (:background "#273737")))))
 (put 'narrow-to-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)

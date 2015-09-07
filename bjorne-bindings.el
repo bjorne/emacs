@@ -5,6 +5,10 @@
    (if (y-or-n-p "Quit Emacs? ")
        (save-buffers-kill-emacs))))
 
+(global-unset-key (kbd "C-x C-z"))
+
+(require 'imenu-anywhere)
+(global-set-key (kbd "C-.") 'imenu-anywhere)
 
 ;; drag stuff
 (global-set-key (kbd "M-n") 'drag-stuff-down)
@@ -28,16 +32,17 @@
 (global-set-key (kbd "<f11>") 'kill-buffer-and-window)
 
 (require 'ace-jump-mode)
-(global-set-key (kbd "<f5>") 'ace-jump-mode)
+(global-set-key (kbd "<f5>") 'magit-status)
 (global-set-key (kbd "M-h") 'ace-jump-mode)
-(global-set-key (kbd "<f6>") 'ace-jump-word-mode)
-(global-set-key (kbd "<f7>") 'ace-jump-line-mode)
+(global-set-key (kbd "<f6>") 'ido-find-file)
+(global-set-key (kbd "<f7>") 'projectile-find-file)
+(global-set-key (kbd "<f8>") 'switch-buffer)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-c q") 'join-line)
 (global-set-key (kbd "C-a") 'back-to-indentation-or-beginning-of-line)
 (global-set-key (kbd "C-x C-b") 'switch-to-buffer-in-project)
 (global-set-key (kbd "C-x M-f") 'ido-find-file-other-window)
-(global-set-key (kbd "<f8>") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
+(global-set-key (kbd "C-x C-e") 'eval-and-replace)
 (global-set-key (kbd "<f9>") (lambda () (interactive) (open-project "js_agent")))
 (global-set-key (kbd "<f12>") 'textmate-goto-file)
 (global-set-key (kbd "C-x C-g") 'keyboard-quit)
@@ -56,8 +61,8 @@
 (global-set-key (kbd "C-M-r") 'isearch-backward)
 
 ;; mark multiple
-(global-set-key (kbd "C-<") 'mark-previous-like-this)
-(global-set-key (kbd "C->") 'mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-'") 'toggle-quotes)
 
 (global-set-key (kbd "§") 'yas/expand)

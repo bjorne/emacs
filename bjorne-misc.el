@@ -1,3 +1,7 @@
+(set-default-font "-apple-Monaco-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1")
+
+(global-auto-revert-mode t)
+
 (add-to-list 'auto-mode-alist '("Carton" . emacs-lisp-mode))
 (add-to-list 'auto-mode-alist '("\\.js" . js2-mode))
 (dolist (regex '("\\.rake$" "\\.gemspec$" "\\.ru$" "Rakefile$" "Gemfile$" "Capfile$" "Guardfile$"))
@@ -28,11 +32,12 @@
 (setq locate-make-command-line (lambda (s) `("mdfind" "-name" ,s)))
 
 ;; global modes
+(require 'wrap-region)
 (wrap-region-global-mode 1)
 (require 'yasnippet)
 (yas/global-mode 1)
 
-(require 'mark-more-like-this)
+(require 'multiple-cursors)
 
 ;; unique buffer names
 (require 'uniquify)
@@ -69,7 +74,14 @@
 
 (require 'dired-x)
 ;; ido-mode is like magic pixie dust!
+;;
 (require 'ido-hacks)
+;; (require 'flx-ido)
+;; (flx-ido-mode 1)
+;; (setq ido-use-face nil)
+
+(require 'ido-vertical-mode)
+(ido-vertical-mode 1)
 (ido-mode t)
 (ido-everywhere)
 ;; (ido-ubiquitous t) ?
@@ -119,12 +131,11 @@
      (set-face-foreground 'diff-added "green4")
      (set-face-foreground 'diff-removed "red3")))
 
-(setq magit-emacsclient-executable "/usr/local/bin/emacsclient")
-(eval-after-load 'magit
-  '(progn
-     (set-face-foreground 'magit-diff-add "green4")
-     (set-face-foreground 'magit-diff-del "red3")))
-(require 'magit-blame)
+;; (setq magit-emacsclient-executable "/usr/local/bin/emacsclient")
+(setq magit-emacsclient-executable (evm-emacsclient))
+(setq magit-branch-arguments nil)
+
+;; (require 'magit-blame)
 ;; (require 'magit-commit-training-wheels)
 ;; (ad-activate 'magit-log-edit-commit)
 
@@ -167,7 +178,7 @@
 (setq projectile-enable-caching t)
 (add-to-list 'projectile-globally-ignored-files ".DS_Store")
 (add-to-list 'projectile-globally-ignored-files "*.min.js*")
-(setq ag-arguments '("--smart-case" "--nogroup" "--column" "--ignore-dir=node_modules" "--ignore-dir=.cask" "--ignore-dir=backups" "--ignore-dir=tmp" "--ignore=projectile.cache" "--"))
+(setq ag-arguments '("--smart-case" "--nogroup" "--column" "--ignore-dir=node_modules" "--ignore-dir=.cask" "--ignore-dir=backups" "--ignore-dir=tmp" "--ignore=projectile.cache" "--ignore-dir=coverage" "--ignore-dir=public/assets" "--"))
 ;; (add-to-list 'projectile-ignored-directories "node_modules")
 
 
@@ -277,5 +288,23 @@
         (ruby . t)
         (perl . t)
         (python .t)))
+
+(require 'rvm)
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-hook 'web-mode-hook
+                      (lambda ()
+                        (setq web-mode-style-padding 2)
+                        (setq web-mode-script-padding 2)))
+
+(require 'flycheck)
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 (provide 'bjorne-misc)
