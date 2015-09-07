@@ -5,12 +5,6 @@
    (if (y-or-n-p "Quit Emacs? ")
        (save-buffers-kill-emacs))))
 
-(global-unset-key (kbd "M-<left>"))
-(global-unset-key (kbd "M-<right>"))
-(global-unset-key (kbd "<left>"))
-(global-unset-key (kbd "<right>"))
-(global-unset-key (kbd "<up>"))
-(global-unset-key (kbd "<down>"))
 
 ;; drag stuff
 (global-set-key (kbd "M-n") 'drag-stuff-down)
