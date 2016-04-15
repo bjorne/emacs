@@ -11,3 +11,6 @@ elpa/
 /tutorial/English.tut
 /var
 .cask/
+/eshell
+/ido.last
+/recentf
