@@ -265,6 +265,7 @@
   (indent-from-previous -2))
 
 ;; TODO Move this stuff to color theme
+(require 'powerline)
 (set-face-background 'powerline-active1 "gray18")
 (set-face-background 'powerline-active2 "DarkGreen")
 (set-face-foreground 'powerline-active1 "white")
