@@ -52,6 +52,14 @@
   (mouse-wheel-mode t)
   (blink-cursor-mode -1))
 
+ (defadvice basic-save-buffer (around fix-require-final-newline activate)
+    (let ((require-final-newline
+           (or
+            (not buffer-file-name)
+            (not (file-exists-p buffer-file-name))
+            (with-temp-buffer (insert-file-contents buffer-file-name) (/= (char-after (1- (point-max))) ?\n)))))
+          ad-do-it))
+
 (setq visible-bell t
       inhibit-startup-message t
       color-theme-is-global t
