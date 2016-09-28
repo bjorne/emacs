@@ -61,6 +61,7 @@
  '(lintnode-port 3000)
  '(magit-completing-read-function (quote magit-ido-completing-read))
  '(magit-default-tracking-name-function (quote magit-default-tracking-name-branch-only))
+ '(magit-diff-refine-hunk t)
  '(magit-highlight-indentation nil)
  '(magit-highlight-trailing-whitespace t)
  '(magit-process-popup-time 1)
