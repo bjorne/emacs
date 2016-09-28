@@ -15,10 +15,12 @@
         evil-yank
         ido-switch-buffer
         indent-for-tab-command
+        insert-register
         isearch-abort
         isearch-backward-regexp
         isearch-delete-char
         isearch-printing-char
+        markdown-exdent-or-delete
         org-end-of-line
         org-force-self-insert
         org-self-insert-command
@@ -26,6 +28,7 @@
         yaml-electric-bar-and-angle
         yaml-electric-dash-and-dot
         yas-expand
+        yas/expand
         ))
 
 (setq mc/cmds-to-run-once
@@ -37,6 +40,7 @@
         electric-indent-just-newline
         end-of-buffer
         isearch-forward-regexp
+        ivy-next-line
         kill-region
         mouse-set-region
         ruby-interpolate
