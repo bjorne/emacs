@@ -4,6 +4,7 @@
 
 (add-to-list 'auto-mode-alist '("Carton" . emacs-lisp-mode))
 (add-to-list 'auto-mode-alist '("\\.js" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json" . json-mode))
 (dolist (regex '("\\.rake$" "\\.gemspec$" "\\.ru$" "Rakefile$" "Gemfile$" "Capfile$" "Guardfile$"))
   (add-to-list 'auto-mode-alist `(,regex . ruby-mode)))
 (dolist (regex '("\\.md$" "\\.markdown$"))
