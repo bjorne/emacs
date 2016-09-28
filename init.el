@@ -14,7 +14,7 @@
 
 ;; root dir
 (setq bjorne-root "~/.emacs.d/")
-(add-to-list 'load-path bjorne-root)
+(add-to-list 'load-path (concat bjorne-root "lisp/"))
 (add-to-list 'load-path (concat bjorne-root "vendor/"))
 
 ;; Turn off mouse interface early in startup to avoid momentary display
