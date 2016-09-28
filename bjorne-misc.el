@@ -141,16 +141,7 @@
      (set-face-foreground 'diff-added "green4")
      (set-face-foreground 'diff-removed "red3")))
 
-;; (setq magit-emacsclient-executable "/usr/local/bin/emacsclient")
-(setq magit-emacsclient-executable (evm-emacsclient))
 (setq magit-branch-arguments nil)
-
-;; (require 'magit-blame)
-;; (require 'magit-commit-training-wheels)
-;; (ad-activate 'magit-log-edit-commit)
-
-(require 'magit-gh-pulls)
-(add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
 
 ;; from starter kit
 ;; Hippie expand: at times perhaps too hip
