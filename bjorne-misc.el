@@ -178,7 +178,11 @@
                                  nil)))))))
 
 ;; ruby interpolate string
-(add-hook 'ruby-mode-hook (lambda () (global-set-key (kbd "#") 'ruby-interpolate)))
+(setq flycheck-disabled-checkers '(ruby-rubocop ruby-rubylint))
+(add-hook 'ruby-mode-hook
+          (lambda ()
+            (global-set-key (kbd "#") 'ruby-interpolate)
+            ))
 (setq ruby-align-to-stmt-keywords '(begin if while unless until case for def))
 
 
