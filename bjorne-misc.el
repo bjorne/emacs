@@ -53,12 +53,13 @@
   (mouse-wheel-mode t)
   (blink-cursor-mode -1))
 
+(setq require-final-newline nil)
  (defadvice basic-save-buffer (around fix-require-final-newline activate)
-    (let ((require-final-newline
+   (let* ((outer-buffer-file-name buffer-file-name)
+         (require-final-newline
            (or
-            (not buffer-file-name)
             (not (file-exists-p buffer-file-name))
-            (with-temp-buffer (insert-file-contents buffer-file-name) (/= (char-after (1- (point-max))) ?\n)))))
+            (with-temp-buffer (insert-file-contents outer-buffer-file-name) (= (char-after (1- (point-max))) ?\n)))))
           ad-do-it))
 
 (setq visible-bell t
