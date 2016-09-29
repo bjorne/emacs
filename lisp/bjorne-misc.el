@@ -2,23 +2,9 @@
 
 (global-auto-revert-mode t)
 
-(add-to-list 'auto-mode-alist '("Carton" . emacs-lisp-mode))
-(add-to-list 'auto-mode-alist '("\\.js" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.json" . json-mode))
-(dolist (regex '("\\.rake$" "\\.gemspec$" "\\.ru$" "Rakefile$" "Gemfile$" "Capfile$" "Guardfile$"))
-  (add-to-list 'auto-mode-alist `(,regex . ruby-mode)))
-(dolist (regex '("\\.md$" "\\.markdown$"))
-  (add-to-list 'auto-mode-alist `(,regex . markdown-mode)))
-
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; mouse scrolling ftw, not
-(setq mouse-wheel-scroll-amount '(8 ((shift) . 8))) ;; one line at a time
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
-(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
-
 ;; cua mode
-;; (cua-mode t)
 (cua-selection-mode t)
 
 ;; linum colors
@@ -32,21 +18,6 @@
 
 (setq locate-make-command-line (lambda (s) `("mdfind" "-name" ,s)))
 
-;; global modes
-(require 'wrap-region)
-(wrap-region-global-mode 1)
-(require 'yasnippet)
-(yas/global-mode 1)
-
-(require 'multiple-cursors)
-
-;; unique buffer names
-(require 'uniquify)
-
-;; save cursor
-(require 'saveplace)
-(setq save-place t)
-
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
   (tooltip-mode -1)
@@ -54,94 +25,68 @@
   (blink-cursor-mode -1))
 
 (setq require-final-newline nil)
- (defadvice basic-save-buffer (around fix-require-final-newline activate)
-   (let* ((outer-buffer-file-name buffer-file-name)
+(defadvice basic-save-buffer (around fix-require-final-newline activate)
+  (let* ((outer-buffer-file-name buffer-file-name)
          (require-final-newline
-           (or
-            (not (file-exists-p buffer-file-name))
-            (with-temp-buffer (insert-file-contents outer-buffer-file-name) (= (char-after (1- (point-max))) ?\n)))))
-          ad-do-it))
+          (or
+           (not (file-exists-p buffer-file-name))
+           (with-temp-buffer (insert-file-contents outer-buffer-file-name) (= (char-after (1- (point-max))) ?\n)))))
+    ad-do-it))
 
-(setq visible-bell t
-      inhibit-startup-message t
-      color-theme-is-global t
-      sentence-end-double-space nil
-      shift-select-mode nil
-      mouse-yank-at-point t
-      uniquify-buffer-name-style 'forward
-      whitespace-style '(face trailing lines-tail tabs)
-      whitespace-line-column 80
-      ediff-window-setup-function 'ediff-setup-windows-plain
-      oddmuse-directory "~/.emacs.d/oddmuse"
-      save-place-file "~/.emacs.d/places"
-      backup-directory-alist `(("." . ,(expand-file-name "~/.emacs.d/backups")))
-      diff-switches "-u")
+(setq
+ visible-bell t
+ inhibit-startup-message t
+ color-theme-is-global t
+ sentence-end-double-space nil
+ shift-select-mode nil
+ mouse-yank-at-point t
+ uniquify-buffer-name-style 'forward
+ whitespace-style '(face trailing lines-tail tabs)
+ whitespace-line-column 80
+ ediff-window-setup-function 'ediff-setup-windows-plain
+ save-place-file (concat var-dir "places")
+ backup-directory-alist `(("." . ,(expand-file-name (concat var-dir "backups"))))
+ diff-switches "-u"
+ recentf-save-file (concat var-dir "recentf"))
 
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
 ;; Highlight current line
 (global-hl-line-mode 1)
 
-(require 'dired-x)
-;; ido-mode is like magic pixie dust!
-;;
-(require 'ido-hacks)
-;; (require 'flx-ido)
-;; (flx-ido-mode 1)
-;; (setq ido-use-face nil)
+;; (setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
 
-(require 'ido-vertical-mode)
-(ido-vertical-mode 1)
-(ido-mode t)
-(ido-everywhere)
-;; (ido-ubiquitous t) ?
-(setq ido-enable-prefix nil
-      ido-enable-flex-matching t
-      ido-auto-merge-work-directories-length nil
-      ido-create-new-buffer 'always
-      ido-use-filename-at-point 'guess
-      ido-use-virtual-buffers t
-      ido-handle-duplicate-virtual-buffers 2
-      ido-max-prospects 10)
+;; (defun ido-disable-line-truncation () (set (make-local-variable 'truncate-lines) nil))
+;; (add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-truncation)
+;; (defun ido-define-keys () ;; C-n/p is more intuitive in vertical layout
+;;   (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+;;   (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
+;; (add-hook 'ido-setup-hook 'ido-define-keys)
 
-
-;; Display ido results vertically, rather than horizontally
-(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
-
-(defun ido-disable-line-truncation () (set (make-local-variable 'truncate-lines) nil))
-(add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-truncation)
-(defun ido-define-keys () ;; C-n/p is more intuitive in vertical layout
-  (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
-  (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
-(add-hook 'ido-setup-hook 'ido-define-keys)
-
-(setq smex-save-file (concat bjorne-root ".smex-items"))
+(setq smex-save-file (concat var-dir ".smex-items"))
 (smex-initialize)
 
 (set-default 'indent-tabs-mode nil)
 (set-default 'indicate-empty-lines t)
 (set-default 'imenu-auto-rescan t)
 
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook 'turn-on-flyspell)
 
 ;; pretty lambdas (esk)
 (font-lock-add-keywords
  nil `(("(?\\(lambda\\>\\)"
-	(0 (progn (compose-region (match-beginning 1) (match-end 1)
-				  ,(make-char 'greek-iso8859-7 107))
-		  nil)))))
+        (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                  ,(make-char 'greek-iso8859-7 107))
+                  nil)))))
 ;; highlight words
 (font-lock-add-keywords
  nil '(("\\<\\(FIX\\|TODO\\|FIXME\\|HACK\\|REFACTOR\\|NOCOMMIT\\)"
         1 font-lock-warning-face t)))
 
-(eval-after-load 'diff-mode
-  '(progn
-     (set-face-foreground 'diff-added "green4")
-     (set-face-foreground 'diff-removed "red3")))
-
-(setq magit-branch-arguments nil)
+;; (eval-after-load 'diff-mode
+;;   '(progn
+;;      (set-face-foreground 'diff-added "green4")
+;;      (set-face-foreground 'diff-removed "red3")))
 
 ;; from starter kit
 ;; Hippie expand: at times perhaps too hip
@@ -150,142 +95,8 @@
 ;; Add this back in at the end of the list.
 (add-to-list 'hippie-expand-try-functions-list 'try-complete-file-name-partially t)
 
-
-;; Javascript
-(setq js-indent-level 2)
-(eval-after-load 'js
-  '(progn (define-key js-mode-map (kbd ",") 'self-insert-command) ;; fixes problem with pretty function font-lock
-          (font-lock-add-keywords
-           'js-mode `(("\\(function *\\)("
-                       (0 (progn (compose-region (match-beginning 1)
-                                                 (match-end 1) "\u0192")
-                                 nil)))))))
-(eval-after-load 'js2-mode
-  '(progn (define-key js2-mode-map (kbd ",") 'self-insert-command) ;; fixes problem with pretty function font-lock
-          (font-lock-add-keywords
-           'js2-mode `(("\\(function *\\)("
-                       (0 (progn (compose-region (match-beginning 1)
-                                                 (match-end 1) "\u0192")
-                                 nil)))))))
-
-;; ruby interpolate string
-(setq flycheck-disabled-checkers '(ruby-rubocop ruby-rubylint))
-(add-hook 'ruby-mode-hook
-          (lambda ()
-            (global-set-key (kbd "#") 'ruby-interpolate)
-            ))
-(setq ruby-align-to-stmt-keywords '(begin if while unless until case for def))
-
-
-;; yasnippets
-;;
-
-
-;; projectile
-(projectile-global-mode) ;; to enable in all buffers
-(setq projectile-enable-caching t)
-(add-to-list 'projectile-globally-ignored-files ".DS_Store")
-(add-to-list 'projectile-globally-ignored-files "*.min.js*")
-(setq ag-arguments '("--smart-case" "--nogroup" "--column" "--ignore-dir=node_modules" "--ignore-dir=.cask" "--ignore-dir=backups" "--ignore-dir=tmp" "--ignore=projectile.cache" "--ignore-dir=coverage" "--ignore-dir=public/assets" "--"))
-;; (add-to-list 'projectile-ignored-directories "node_modules")
-
-
-;; ;; jslinting
-;; (require 'flymake-jslint)
-;; ;; Make sure we can find the lintnode executable
-;; (setq lintnode-location "~/.emacs.d/el-get/lintnode")
-;; (setq lintnode-node-program "/usr/local/bin/node")
-;; (setq lintnode-autostart t)
-;; (setq lintnode-jslint-excludes (list 'onevar))
-
-;; (add-hook 'js-mode-hook
-;;           (lambda ()
-;;             (lintnode-hook)))
-
-
-;; coding hook
-(defun bjorne-coding-hook ()
-  (auto-fill-mode 0)
-  (linum-mode)
-  (idle-highlight-mode 1)
-  (subword-mode)
-  (whitespace-mode)
-  )
-
-(add-hook 'js2-mode-hook 'bjorne-coding-hook)
-(add-hook 'js-mode-hook 'bjorne-coding-hook)
-(add-hook 'ruby-mode-hook 'bjorne-coding-hook)
-(add-hook 'markdown-mode-hook 'bjorne-coding-hook)
-(add-hook 'coffee-mode-hook 'bjorne-coding-hook)
-(add-hook 'emacs-lisp-mode-hook 'bjorne-coding-hook)
-
 ;; emacsclient ftw
 (server-start)
-
-;; coffee tab width 2
-(setq coffee-tab-width 2)
-
-;; js repl
-(setq inferior-js-program-command "node")
-
-(setq inferior-js-mode-hook
-      (lambda ()
-        ;; We like nice colors
-        (ansi-color-for-comint-mode-on)
-        ;; Deal with some prompt nonsense
-        (add-to-list 'comint-preoutput-filter-functions
-                     (lambda (output)
-                       (replace-regexp-in-string ".*1G\.\.\..*5G" "..."
-                                                 (replace-regexp-in-string ".*1G.*3G" "&gt;" output))))))
-
-(defun coffee-newline ()
-  (local-set-key (kbd "C-j") 'coffee-newline-and-indent))
-
-(add-hook 'coffee-mode-hook 'coffee-newline)
-
-(defun indent-from-previous (diff)
-  (interactive)
-  (let ((target-column
-         (save-excursion
-           (goto-char (line-beginning-position))
-           (re-search-backward "\[^\s\n\]")
-           (back-to-indentation)
-           (current-column)))
-        (current-column (save-excursion
-                          (back-to-indentation)))
-    (let ((beg (region-beginning)) (end (region-end)))
-      (unless (region-active-p)
-          (setq beg (line-beginning-position)
-                end (line-end-position)))
-      (indent-region beg end (+ column (or diff 0)))))))
-
-
-(defun indent-as-previous ()
-  (interactive)
-  (indent-from-previous 0))
-
-(defun indent-more-than-previous ()
-  (interactive)
-  (indent-from-previous 2))
-
-(defun indent-less-than-previous ()
-  (interactive)
-  (indent-from-previous -2))
-
-;; TODO Move this stuff to color theme
-(require 'powerline)
-(set-face-background 'powerline-active1 "gray18")
-(set-face-background 'powerline-active2 "DarkGreen")
-(set-face-foreground 'powerline-active1 "white")
-(set-face-foreground 'powerline-active2 "white")
-(set-face-background 'mode-line "ForestGreen")
-(set-face-foreground 'mode-line "white")
-(set-face-attribute 'mode-line-inactive nil :box nil)
-(set-face-background 'powerline-inactive1 "gray22")
-(set-face-background 'powerline-inactive2 "gray11")
-(powerline-default-theme)
-
-(drag-stuff-global-mode 1)
 
 ;; dont ping machines ffs
 (setq ffap-machine-p-known 'reject)
@@ -297,23 +108,5 @@
         (ruby . t)
         (perl . t)
         (python .t)))
-
-(require 'rvm)
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-hook 'web-mode-hook
-                      (lambda ()
-                        (setq web-mode-style-padding 2)
-                        (setq web-mode-script-padding 2)))
-
-(require 'flycheck)
-(add-hook 'after-init-hook #'global-flycheck-mode)
 
 (provide 'bjorne-misc)

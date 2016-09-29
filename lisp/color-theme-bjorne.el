@@ -50,6 +50,8 @@
      (toolbar ((t (nil))))
      (underline ((nil (:underline t))))
      (zmacs-region ((t (:background "snow" :foreground "ble"))))
+     (diff-added ((t (:foreground "green4"))))
+     (diff-removed ((t (:foreground "red3"))))
      )))
 
 (provide 'color-theme-bjorne)

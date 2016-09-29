@@ -32,7 +32,6 @@
 (global-set-key (kbd "<f11>") 'kill-buffer-and-window)
 
 (require 'ace-jump-mode)
-(global-set-key (kbd "<f5>") 'magit-status)
 (global-set-key (kbd "M-h") 'ace-jump-mode)
 (global-set-key (kbd "<f6>") 'ido-find-file)
 (global-set-key (kbd "<f7>") 'projectile-find-file)
@@ -47,8 +46,6 @@
 (global-set-key (kbd "<f12>") 'textmate-goto-file)
 (global-set-key (kbd "C-x C-g") 'keyboard-quit)
 (global-set-key (kbd "M-/") 'hippie-expand)
-(global-set-key (kbd "C-c g") 'magit-status)
-(global-set-key (kbd "C-c b") 'magit-blame-mode)
 (global-set-key (kbd "C-z") 'undo)
 ;; zoom
 (global-set-key (kbd "C-+") 'text-scale-increase)
@@ -80,8 +77,6 @@
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
 
-(define-key projectile-mode-map (kbd "C-c p t") 'projectile-toggle-test-code)
-(define-key projectile-mode-map (kbd "C-c p g") 'ag-project)
 (windmove-default-keybindings) ;; Shift+direction
 
 (defun other-window-backwards ()
