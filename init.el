@@ -154,35 +154,29 @@
   :init
   (setq save-place t))
 (use-package dired-x)
-(use-package ido
-  :init (progn (ido-mode 1)
-               (ido-everywhere 1))
+(use-package counsel
+  :demand t)
+(use-package ivy
   :config
   (progn
-    (setq ido-enable-prefix nil
-          ido-enable-flex-matching t
-          ido-auto-merge-work-directories-length nil
-          ido-create-new-buffer 'always
-          ido-use-filename-at-point 'guess
-          ido-use-virtual-buffers t
-          ido-handle-duplicate-virtual-buffers 2
-          ido-max-prospects 10
-          ido-save-directory-list-file (concat var-dir "ido.last"))
-    (setq ido-case-fold t)
-    (setq ido-everywhere t)
-    (setq ido-file-extensions-order '(".rb" ".el" ".coffee" ".js"))
-    (add-to-list 'ido-ignore-files "\\.DS_Store"))
-  :bind
-  (:map ido-common-completion-map
-        ("C-n" . ido-next-match)
-        ("C-p" . ido-prev-match)))
-(use-package ido-hacks)
-(use-package ido-vertical-mode
-  :init
-  (progn (ido-vertical-mode 1)))
-(use-package smex
-  :config
-  (setq smex-save-file (concat var-dir "smex-items")))
+    (ivy-mode 1)
+    (setq ivy-use-virtual-buffers t)
+    (global-set-key "\C-s" 'swiper)
+    (global-set-key (kbd "C-c C-r") 'ivy-resume)
+    (global-set-key (kbd "<f6>") 'ivy-resume)
+    (global-set-key (kbd "M-x") 'counsel-M-x)
+    (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+    (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+    (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+    (global-set-key (kbd "<f1> l") 'counsel-load-library)
+    (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+    (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+    (global-set-key (kbd "C-c a") 'counsel-git)
+    (global-set-key (kbd "C-c j") 'counsel-git-grep)
+    (global-set-key (kbd "C-c k") 'counsel-ag)
+    (global-set-key (kbd "C-x l") 'counsel-locate)
+    (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+    (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
 (use-package ag
   :config
   (setq ag-arguments '("--smart-case" "--nogroup" "--column" "--ignore-dir=node_modules" "--ignore-dir=.cask" "--ignore-dir=backups" "--ignore-dir=tmp" "--ignore=projectile.cache" "--ignore-dir=coverage" "--ignore-dir=public/assets" "--")))
@@ -193,7 +187,7 @@
     (define-key projectile-mode-map (kbd "C-c p t") 'projectile-toggle-test-code)
     (define-key projectile-mode-map (kbd "C-c p g") 'ag-project)
     (setq projectile-enable-caching t)
-    (setq projectile-completion-system 'ido)
+    (setq projectile-completion-system 'ivy)
     (setq projectile-cache-file (concat var-dir "projectile.cache"))
     (setq projectile-known-projects-file (concat var-dir "projectile-bookmarks.eld"))
     (add-to-list 'projectile-globally-ignored-files ".DS_Store")
@@ -221,7 +215,7 @@
     (bind-key "C-c C-a" 'magit-just-amend magit-mode-map))
   :config
   (progn
-    (setq magit-completing-read-function 'magit-ido-completing-read)
+    (setq magit-completing-read-function 'ivy-completing-read)
     (setq magit-branch-arguments nil)
     (setq magit-process-popup-time 1)
     (setq magit-diff-refine-hunk t))
@@ -253,11 +247,8 @@
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(package-selected-packages
    (quote
-    (ivy zencoding-mode yasnippet yaml-mode wrap-region web-mode use-package textmate smex scratch rvm rspec-mode restclient projectile prodigy powerline paredit pallet osx-dictionary multiple-cursors markdown-mode mark-multiple magit-gh-pulls json-mode js2-mode js-comint jade-mode imenu-anywhere idomenu ido-vertical-mode ido-hacks ido-completing-read+ idle-highlight-mode highlight-indentation haml-mode google-maps gist free-keys flycheck flx-ido expand-region exec-path-from-shell evm evil ess drag-stuff discover color-theme coffee-mode ag actionscript-mode ace-jump-mode)))
+    (ivy-hydra counsel ivy-bibtex flyspell-correct-ivy ivy zencoding-mode yasnippet yaml-mode wrap-region web-mode use-package textmate smex scratch rvm rspec-mode restclient projectile prodigy powerline paredit pallet osx-dictionary multiple-cursors markdown-mode mark-multiple magit-gh-pulls json-mode js2-mode js-comint jade-mode imenu-anywhere idle-highlight-mode highlight-indentation haml-mode google-maps gist free-keys flycheck expand-region exec-path-from-shell evm evil ess drag-stuff discover color-theme coffee-mode ag actionscript-mode ace-jump-mode)))
  '(send-mail-function (quote mailclient-send-it))
- '(yas-prompt-functions
-   (quote
-    (yas/ido-prompt yas/x-prompt yas/dropdown-prompt yas/completing-prompt yas/ido-prompt yas/no-prompt)))
  '(yas/trigger-key nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
