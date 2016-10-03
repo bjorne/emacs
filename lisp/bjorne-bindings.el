@@ -41,7 +41,6 @@
 (global-set-key (kbd "C-a") 'back-to-indentation-or-beginning-of-line)
 (global-set-key (kbd "C-x C-b") 'switch-to-buffer-in-project)
 (global-set-key (kbd "C-x M-f") 'ido-find-file-other-window)
-(global-set-key (kbd "C-x C-e") 'eval-and-replace)
 (global-set-key (kbd "<f9>") (lambda () (interactive) (open-project "js_agent")))
 (global-set-key (kbd "<f12>") 'textmate-goto-file)
 (global-set-key (kbd "C-x C-g") 'keyboard-quit)
