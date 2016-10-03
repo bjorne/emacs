@@ -216,6 +216,7 @@
   :config
   (progn
     (setq magit-completing-read-function 'ivy-completing-read)
+    (setq magit-repository-directories '("~/Code"))
     (setq magit-branch-arguments nil)
     (setq magit-process-popup-time 1)
     (setq magit-diff-refine-hunk t))
@@ -235,16 +236,6 @@
  '(js2-basic-offset 2)
  '(js2-mirror-mode t)
  '(lintnode-port 3000)
- '(magit-completing-read-function (quote magit-ido-completing-read))
- '(magit-default-tracking-name-function (quote magit-default-tracking-name-branch-only))
- '(magit-diff-refine-hunk t)
- '(magit-highlight-indentation nil)
- '(magit-highlight-trailing-whitespace t)
- '(magit-process-popup-time 1)
- '(magit-repo-dirs (quote ("~/Code")))
- '(magit-repo-dirs-depth 2)
- '(magit-set-upstream-on-push t)
- '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(package-selected-packages
    (quote
     (ivy-hydra counsel ivy-bibtex flyspell-correct-ivy ivy zencoding-mode yasnippet yaml-mode wrap-region web-mode use-package textmate smex scratch rvm rspec-mode restclient projectile prodigy powerline paredit pallet osx-dictionary multiple-cursors markdown-mode mark-multiple magit-gh-pulls json-mode js2-mode js-comint jade-mode imenu-anywhere idle-highlight-mode highlight-indentation haml-mode google-maps gist free-keys flycheck expand-region exec-path-from-shell evm evil ess drag-stuff discover color-theme coffee-mode ag actionscript-mode ace-jump-mode)))
