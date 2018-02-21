@@ -20,7 +20,7 @@
                (buffer-list))
             (buffer-list)))
          (buffer-names (mapcar 'buffer-name buffers)))
-    (flet ((ido-make-buffer-list (default) buffer-names))
+    (cl-flet ((ido-make-buffer-list (default) buffer-names))
       (call-interactively 'ido-switch-buffer))))
 
 (defun ruby-interpolate ()
@@ -167,6 +167,14 @@ it)"
                  "/Users/bjorne/Code/agency/lib/%s/%s.coffee"
                  (nth 1 spec-matches)
                  (nth 2 spec-matches))))))))
+
+(defun cycle-files-with-same-suffix ()
+  "Cycle between files between the same suffix, e.g. index.css, index.html, index.js"
+  (interactive)
+  (let* ((file-name-base (replace-regexp-in-string "\.[^.]*$" "" (buffer-file-name)))
+         (matching-files (f-entries (f-dirname file-name-base) (lambda (fn) (s-contains-p file-name-base fn)) nil))
+         (index (-elem-index buffer-file-name matching-files))
+         (next-counterpart (nth (% (1+ index) (length matching-files)) matching-files))) (find-file next-counterpart)))
 
 (defun eval-and-replace ()
   "Replace the preceding sexp with its value."

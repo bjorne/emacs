@@ -14,13 +14,8 @@
 (global-set-key (kbd "M-n") 'drag-stuff-down)
 (global-set-key (kbd "M-p") 'drag-stuff-up)
 
-
 (global-set-key (kbd "C-n") 'next-line)
 (global-set-key (kbd "C-p") 'previous-line)
-(global-set-key (kbd "C-S-n") (lambda () (interactive) (next-line) (scroll-up 1)))
-(global-set-key (kbd "C-S-p") (lambda () (interactive) (previous-line) (scroll-down 1)))
-(global-set-key (kbd "M-N") (lambda () (interactive) (next-line 5) (scroll-up 5)))
-(global-set-key (kbd "M-P") (lambda () (interactive) (previous-line 5) (scroll-down 5)))
 
 (global-set-key (kbd "C-<f7>") (lambda () (interactive) (window-configuration-to-register ?1)))
 (global-set-key (kbd "<f7>") (lambda () (interactive) (jump-to-register ?1)))
@@ -33,16 +28,9 @@
 
 (require 'ace-jump-mode)
 (global-set-key (kbd "M-h") 'ace-jump-mode)
-(global-set-key (kbd "<f6>") 'ido-find-file)
-(global-set-key (kbd "<f7>") 'projectile-find-file)
-(global-set-key (kbd "<f8>") 'switch-buffer)
-(global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-c q") 'join-line)
 (global-set-key (kbd "C-a") 'back-to-indentation-or-beginning-of-line)
-(global-set-key (kbd "C-x C-b") 'switch-to-buffer-in-project)
-(global-set-key (kbd "C-x M-f") 'ido-find-file-other-window)
-(global-set-key (kbd "<f9>") (lambda () (interactive) (open-project "js_agent")))
-(global-set-key (kbd "<f12>") 'textmate-goto-file)
+(global-set-key (kbd "C-s-f") 'cycle-files-with-same-suffix)
 (global-set-key (kbd "C-x C-g") 'keyboard-quit)
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "C-z") 'undo)

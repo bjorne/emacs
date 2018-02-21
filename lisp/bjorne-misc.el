@@ -48,6 +48,7 @@
  backup-directory-alist `(("." . ,(expand-file-name (concat var-dir "backups"))))
  diff-switches "-u"
  recentf-save-file (concat var-dir "recentf"))
+(setq tramp-default-method "ssh")
 
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
@@ -90,7 +91,7 @@
 
 ;; from starter kit
 ;; Hippie expand: at times perhaps too hip
-(dolist (f '(try-expand-line try-expand-list try-complete-file-name-partially))
+(dolist (f '(try-expand-line try-expand-list try-complete-file-name-partially try-complete-lisp-symbol))
   (delete f hippie-expand-try-functions-list))
 ;; Add this back in at the end of the list.
 (add-to-list 'hippie-expand-try-functions-list 'try-complete-file-name-partially t)

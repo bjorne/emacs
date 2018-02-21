@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : let block with double
+# --
+let :$1 do
+  double(:$1)$0
+end

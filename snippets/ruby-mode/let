@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-#name : after block
+#name : let block
 # --
-after do
+let :$1 do
   $0
 end

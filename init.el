@@ -99,7 +99,7 @@
 (use-package ruby-mode
   :init
   (progn
-    (use-package ruby-tools)
+    ;; (use-package ruby-tools)
     (use-package bundler)
     (use-package rspec-mode
       :config
@@ -113,18 +113,17 @@
                                                  (interactive)
                                                  (rspec-rerun))))))
 
-        (setq rspec-use-rvm t)
-        (setq rspec-use-rake-when-possible nil)
-        (defadvice rspec-compile (around rspec-compile-around activate)
-          "Use BASH shell for running the specs because of ZSH issues."
-          (let ((shell-file-name "/bin/bash"))
-            ad-do-it)))))
+        ;; (setq rspec-use-rake-when-possible nil)
+        ;; (defadvice rspec-compile (around rspec-compile-around activate)
+        ;;   "Use BASH shell for running the specs because of ZSH issues."
+        ;;   (let ((shell-file-name "/bin/bash"))
+        ;;     ad-do-it))
+        )))
   :config
   (progn
-    (setq ruby-align-to-stmt-keywords '(begin if while unless until case for def))
-    (add-hook 'ruby-mode-hook 'rvm-activate-corresponding-ruby)
-    (setq ruby-insert-encoding-magic-comment nil)
-    (setq ruby-deep-indent-paren nil))
+    ;; (setq ruby-align-to-stmt-keywords '(begin if while unless until case for def))
+    ;; (setq ruby-insert-encoding-magic-comment nil)
+    ;; (setq ruby-deep-indent-paren nil))
   :bind (("C-M-h" . backward-kill-word)
          ("C-M-n" . scroll-up-five)
          ("C-M-p" . scroll-down-five))
@@ -153,7 +152,15 @@
 (use-package saveplace
   :init
   (setq save-place t))
-(use-package dired-x)
+(use-package expand-region
+  :ensure t
+  :config
+  (global-set-key (kbd "C-=") 'er/expand-region))
+(use-package copy-as-format)
+(use-package browse-at-remote
+  :config
+  (setq browse-at-remote-prefer-symbolic nil)
+  (global-set-key (kbd "C-c n") 'browse-at-remote))
 (use-package counsel
   :demand t)
 (use-package ivy
@@ -161,9 +168,11 @@
   (progn
     (ivy-mode 1)
     (setq ivy-use-virtual-buffers t)
+    (setq ivy-extra-directories nil)
     (global-set-key "\C-s" 'swiper)
     (global-set-key (kbd "C-c C-r") 'ivy-resume)
     (global-set-key (kbd "<f6>") 'ivy-resume)
+    (global-set-key (kbd "M-i") 'ivy-imenu-anywhere)
     (global-set-key (kbd "M-x") 'counsel-M-x)
     (global-set-key (kbd "C-x C-f") 'counsel-find-file)
     (global-set-key (kbd "<f1> f") 'counsel-describe-function)
@@ -178,8 +187,9 @@
     (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
     (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
 (use-package ag
-  :config
-  (setq ag-arguments '("--smart-case" "--nogroup" "--column" "--ignore-dir=node_modules" "--ignore-dir=.cask" "--ignore-dir=backups" "--ignore-dir=tmp" "--ignore=projectile.cache" "--ignore-dir=coverage" "--ignore-dir=public/assets" "--")))
+  ;; :config
+  ;; (setq ag-arguments '("--smart-case" "--nogroup" "--ignore-dir=node_modules" "--ignore-dir=.cask" "--ignore-dir=backups" "--ignore-dir=tmp" "--ignore=projectile.cache" "--ignore-dir=coverage" "--ignore-dir=public/assets" "--"))
+  )
 (use-package projectile
   :init (projectile-global-mode 1)
   :config
@@ -191,10 +201,15 @@
     (setq projectile-cache-file (concat var-dir "projectile.cache"))
     (setq projectile-known-projects-file (concat var-dir "projectile-bookmarks.eld"))
     (add-to-list 'projectile-globally-ignored-files ".DS_Store")
-    (add-to-list 'projectile-globally-ignored-files "*.min.js*"))
+    (add-to-list 'projectile-globally-ignored-files "*.min.js*")
+    (add-to-list 'projectile-globally-ignored-files "*.bundle.js")
+    (add-to-list 'projectile-globally-ignored-files "dist/"))
   :bind (:map projectile-mode-map
               ("C-c p t" . projectile-toggle-test-code)
               ("C-c p g" . ag-project)))
+(use-package counsel-projectile
+  :ensure t
+  :init (counsel-projectile-mode))
 (use-package powerline
   :config
   (progn
@@ -219,27 +234,71 @@
     (setq magit-repository-directories '("~/Code"))
     (setq magit-branch-arguments nil)
     (setq magit-process-popup-time 1)
-    (setq magit-diff-refine-hunk t))
+    (setq magit-diff-refine-hunk t)
+    (magit-define-popup-action 'magit-rebase-popup
+      ?M "master\n" (lambda ()
+                      (interactive)
+                      (magit-rebase "master" (magit-rebase-arguments))) ?e t)
+    (magit-define-popup-action 'magit-rebase-popup
+      ?o "origin/master\n" (lambda ()
+                      (interactive)
+                      (magit-rebase "origin/master" (magit-rebase-arguments))) ?M))
   :bind
   (("C-c g" . magit-status)
    ("C-c b" . magit-blame)))
+(use-package magithub
+  :ensure t
+  :after magit
+  :config
+  (magithub-feature-autoinject t)
+  (setq magithub-clone-default-directory "~/Code"))
+(use-package highlight2clipboard)
+(use-package re-builder
+  :config
+  (progn
+    (setq reb-re-syntax 'string)))
+(use-package pcre2el
+  :ensure t)
+(use-package dockerfile-mode
+  :ensure t
+  :mode (("^Dockerfile" . dockerfile-mode)))
+(use-package yasnippet
+  :ensure t
+  :init
+  (setq yas-snippet-dirs (list (concat bjorne-root "snippets")))
+  :config
+  (yas-global-mode 1)
+  (yas-reload-all))
+(use-package yasnippet-snippets
+  :ensure t)
 (setq whitespace-style (quote (face tabs empty trailing)))
 
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (sh . t)))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ag-highlight-search t)
+ '(ag-ignore-list (quote ("builds/" "*.min.js" "dist/")))
  '(coffee-args-repl (quote ("-i" "NODE_NO_READLINE=1")))
  '(css-indent-offset 2)
  '(ispell-program-name "aspell")
  '(js2-basic-offset 2)
  '(js2-mirror-mode t)
+ '(json-reformat:indent-width 2)
  '(lintnode-port 3000)
+ '(magit-rebase-arguments (quote ("--autosquash")))
  '(package-selected-packages
    (quote
-    (ivy-hydra counsel ivy-bibtex flyspell-correct-ivy ivy zencoding-mode yasnippet yaml-mode wrap-region web-mode use-package textmate smex scratch rvm rspec-mode restclient projectile prodigy powerline paredit pallet osx-dictionary multiple-cursors markdown-mode mark-multiple magit-gh-pulls json-mode js2-mode js-comint jade-mode imenu-anywhere idle-highlight-mode highlight-indentation haml-mode google-maps gist free-keys flycheck expand-region exec-path-from-shell evm evil ess drag-stuff discover color-theme coffee-mode ag actionscript-mode ace-jump-mode)))
+    (dash magithub tide company smartparens nvm yasnippet-snippets apib-mode dockerfile-mode pcre2el bundler ruby-tools enh-ruby-mode eslint-fix highlight2clipboard ggtags avy magit-filenotify browse-at-remote copy-as-format flymd js-auto-beautify rjsx-mode gh-md typescript-mode counsel-projectile lorem-ipsum iedit rbenv ivy-hydra counsel ivy-bibtex flyspell-correct-ivy ivy zencoding-mode yasnippet yaml-mode wrap-region web-mode use-package textmate smex scratch rspec-mode restclient projectile prodigy powerline paredit pallet osx-dictionary multiple-cursors markdown-mode mark-multiple magit-gh-pulls json-mode js2-mode js-comint jade-mode imenu-anywhere idle-highlight-mode highlight-indentation haml-mode google-maps gist free-keys flycheck expand-region exec-path-from-shell evm evil ess drag-stuff discover color-theme coffee-mode ag actionscript-mode ace-jump-mode)))
+ '(rspec-use-bundler-when-possible nil)
  '(send-mail-function (quote mailclient-send-it))
+ '(typescript-indent-level 2)
+ '(web-mode-code-indent-offset 2)
  '(yas/trigger-key nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -251,3 +310,4 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
+
