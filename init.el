@@ -96,7 +96,9 @@
                         (setq web-mode-markup-indent-offset 2)
                         (setq web-mode-style-padding 2)
                         (setq web-mode-script-padding 2)))))
-(use-package ruby-mode
+
+(use-package enh-ruby-mode
+  :ensure t
   :init
   (progn
     ;; (use-package ruby-tools)
@@ -121,19 +123,9 @@
         )))
   :config
   (progn
-    ;; (setq ruby-align-to-stmt-keywords '(begin if while unless until case for def))
-    ;; (setq ruby-insert-encoding-magic-comment nil)
-    ;; (setq ruby-deep-indent-paren nil))
-  :bind (("C-M-h" . backward-kill-word)
-         ("C-M-n" . scroll-up-five)
-         ("C-M-p" . scroll-down-five))
-  :mode (("\\.rake$" . ruby-mode)
-         ("\\.gemspec$" . ruby-mode)
-         ("\\.ru$" . ruby-mode)
-         ("Rakefile$" . ruby-mode)
-         ("Gemfile$" . ruby-mode)
-         ("Capfile$" . ruby-mode)
-         ("Guardfile$" . ruby-mode)))
+    (add-hook 'enh-ruby-mode-hook 'bjorne-coding-hook)
+    (add-to-list 'auto-mode-alist
+                 '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))))
 (use-package markdown-mode
   :mode (("\\.markdown$" . markdown-mode)
          ("\\.md$" . markdown-mode))
