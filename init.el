@@ -125,7 +125,10 @@
 (use-package markdown-mode
   :mode (("\\.markdown$" . markdown-mode)
          ("\\.md$" . markdown-mode))
-  :config (add-hook 'markdown-mode-hook 'bjorne-coding-hook))
+  :config
+  (progn
+    (add-hook 'markdown-mode-hook 'bjorne-coding-hook)
+    (add-hook 'markdown-mode-hook 'visual-line-mode)))
 (use-package flycheck
   :init
   (setq flycheck-disabled-checkers '(ruby-rubocop ruby-rubylint))
