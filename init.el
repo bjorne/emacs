@@ -113,14 +113,7 @@
                       (setq compilation-scroll-output t)
                       (local-set-key (kbd "g") (lambda ()
                                                  (interactive)
-                                                 (rspec-rerun))))))
-
-        ;; (setq rspec-use-rake-when-possible nil)
-        ;; (defadvice rspec-compile (around rspec-compile-around activate)
-        ;;   "Use BASH shell for running the specs because of ZSH issues."
-        ;;   (let ((shell-file-name "/bin/bash"))
-        ;;     ad-do-it))
-        )))
+                                                 (rspec-rerun)))))))))
   :config
   (progn
     (add-hook 'enh-ruby-mode-hook 'bjorne-coding-hook)
