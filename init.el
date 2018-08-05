@@ -116,6 +116,9 @@
                                                  (rspec-rerun)))))))))
   :config
   (progn
+    (setq enh-ruby-deep-indent-paren nil)
+    (setq enh-ruby-deep-indent-construct nil)
+    (setq enh-ruby-add-encoding-comment-on-save nil)
     (add-hook 'enh-ruby-mode-hook 'bjorne-coding-hook)
     (add-to-list 'auto-mode-alist
                  '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))))
