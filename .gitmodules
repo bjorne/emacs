@@ -1,0 +1,3 @@
+[submodule "vendor/cask"]
+	path = vendor/cask
+	url = https://github.com/cask/cask.git

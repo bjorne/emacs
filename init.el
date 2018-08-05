@@ -29,7 +29,7 @@
 (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
   (when (fboundp mode) (funcall mode -1)))
 
-(require 'cask "~/.cask/cask.el")
+(require 'cask (concat bjorne-root "vendor/cask/cask.el"))
 (cask-initialize)
 (require 'pallet)
 (pallet-mode t)
