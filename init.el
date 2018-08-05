@@ -242,6 +242,7 @@
   :after magit
   :config
   (magithub-feature-autoinject t)
+  (setq magithub-cache-file (concat var-dir "magithub/cache"))
   (setq magithub-clone-default-directory "~/Code"))
 (use-package highlight2clipboard)
 (use-package re-builder
