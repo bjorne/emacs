@@ -29,6 +29,7 @@
 (depends-on "epl")
 (depends-on "eslint-fix")
 (depends-on "ess")
+(depends-on "esup")
 (depends-on "evil")
 (depends-on "evm")
 (depends-on "exec-path-from-shell")
