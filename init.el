@@ -238,6 +238,7 @@
   (("C-c g" . magit-status)
    ("C-c b" . magit-blame)))
 (use-package magithub
+  :disabled t
   :ensure t
   :after magit
   :config
