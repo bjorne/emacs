@@ -111,4 +111,14 @@
         (perl . t)
         (python .t)))
 
+(defun ivy-magit-dir (x)
+  (magit-status-internal (if (f-dir-p x) x (f-dirname x))))
+
+(ivy-set-actions
+ 'dired
+ '(("g" ivy-magit-dir "magit")))
+(ivy-set-actions
+ 'counsel-find-file
+ '(("g" ivy-magit-dir "magit")))
+
 (provide 'bjorne-misc)
