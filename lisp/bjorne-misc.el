@@ -112,8 +112,11 @@
         (python .t)))
 
 (defun ivy-magit-dir (x)
-  (magit-status-internal (if (f-dir-p x) x (f-dirname x))))
+  (print (concat "dir" (magit-toplevel (if (f-dir-p x) x (f-dirname x)))))
+  (with-ivy-window
+    (magit-status-internal (magit-toplevel (if (f-dir-p x) x (f-dirname x))))))
 
+(require 'ivy)
 (ivy-set-actions
  'dired
  '(("g" ivy-magit-dir "magit")))

@@ -245,8 +245,6 @@
   (magithub-feature-autoinject t)
   (setq magithub-cache-file (concat var-dir "magithub/cache"))
   (setq magithub-clone-default-directory "~/Code"))
-(use-package highlight2clipboard
-  :if (string-equal system-type "darwin"))
 (use-package re-builder
   :config
   (progn
@@ -302,10 +300,11 @@
  '(magit-rebase-arguments (quote ("--autosquash")))
  '(package-selected-packages
    (quote
-    (esup ansible markdown-preview-mode dash magithub tide company smartparens nvm yasnippet-snippets apib-mode dockerfile-mode pcre2el bundler ruby-tools enh-ruby-mode eslint-fix highlight2clipboard ggtags avy magit-filenotify browse-at-remote copy-as-format flymd js-auto-beautify rjsx-mode gh-md typescript-mode counsel-projectile lorem-ipsum iedit rbenv ivy-hydra counsel ivy-bibtex flyspell-correct-ivy ivy yasnippet yaml-mode wrap-region web-mode use-package textmate smex scratch rspec-mode restclient projectile prodigy powerline paredit pallet osx-dictionary multiple-cursors markdown-mode mark-multiple magit-gh-pulls json-mode js2-mode js-comint jade-mode imenu-anywhere idle-highlight-mode highlight-indentation haml-mode google-maps gist free-keys flycheck expand-region exec-path-from-shell evm evil ess drag-stuff discover color-theme coffee-mode ag actionscript-mode ace-jump-mode)))
+    (graphql-mode vue-mode esup ansible markdown-preview-mode dash magithub tide company smartparens nvm yasnippet-snippets apib-mode dockerfile-mode pcre2el bundler ruby-tools enh-ruby-mode eslint-fix ggtags avy magit-filenotify browse-at-remote copy-as-format flymd js-auto-beautify rjsx-mode gh-md typescript-mode counsel-projectile lorem-ipsum iedit rbenv ivy-hydra counsel ivy-bibtex flyspell-correct-ivy ivy yasnippet yaml-mode wrap-region web-mode use-package textmate smex scratch rspec-mode restclient projectile prodigy powerline paredit pallet osx-dictionary multiple-cursors markdown-mode mark-multiple magit-gh-pulls json-mode js2-mode js-comint jade-mode imenu-anywhere idle-highlight-mode highlight-indentation haml-mode google-maps gist free-keys flycheck expand-region exec-path-from-shell evm evil drag-stuff discover color-theme coffee-mode ag actionscript-mode ace-jump-mode)))
  '(rspec-use-bundler-when-possible nil)
  '(send-mail-function (quote mailclient-send-it))
  '(typescript-indent-level 2)
+ '(vue-html-extra-indent 2)
  '(web-mode-code-indent-offset 2)
  '(yas/trigger-key nil))
 (custom-set-faces
