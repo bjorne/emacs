@@ -73,6 +73,7 @@
 (set-default 'imenu-auto-rescan t)
 
 (add-hook 'text-mode-hook 'turn-on-flyspell)
+(add-hook 'sql-mode-hook 'bjorne-coding-hook)
 
 ;; pretty lambdas (esk)
 (font-lock-add-keywords
