@@ -43,11 +43,12 @@
  shift-select-mode nil
  mouse-yank-at-point t
  uniquify-buffer-name-style 'forward
- whitespace-style '(face trailing lines-tail tabs)
+ whitespace-style '(face empty trailing lines-tail tabs)
  whitespace-line-column 80
  ediff-window-setup-function 'ediff-setup-windows-plain
  save-place-file (concat var-dir "places")
  backup-directory-alist `(("." . ,(expand-file-name (concat var-dir "backups"))))
+ auto-save-file-name-transforms `((".*", (expand-file-name (concat var-dir "auto-saves")) t))
  diff-switches "-u"
  recentf-save-file (concat var-dir "recentf"))
 (setq tramp-default-method "ssh")

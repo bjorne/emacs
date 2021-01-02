@@ -364,12 +364,6 @@
   :ensure t
   :config (setq lsp-metals-treeview-show-when-views-received t))
 
-(setq whitespace-style (quote (face tabs empty trailing)))
-
-;; (org-babel-do-load-languages
-;;  'org-babel-load-languages
-;;  '(
-;;    (sh . t)))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
