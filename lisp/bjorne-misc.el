@@ -1,6 +1,6 @@
-(when (string-equal system-type "darwin")
-      (add-to-list 'default-frame-alist
-                       '(font . "-apple-Monaco-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1")))
+;; (when (string-equal system-type "darwin")
+;;       (add-to-list 'default-frame-alist
+;;                        '(font . "-apple-Monaco-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1")))
 
 (global-auto-revert-mode t)
 

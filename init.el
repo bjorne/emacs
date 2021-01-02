@@ -46,14 +46,28 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(use-package solarized-theme
-  :init
-  (load-theme 'solarized-dark t))
-
 (use-package exec-path-from-shell
   :init
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)))
+
+(use-package all-the-icons)
+(use-package doom-modeline
+  :init
+  (doom-modeline-mode 1))
+
+(use-package doom-themes
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-one t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
 
 (defun bjorne-coding-hook ()
   "Set things up for coding."
@@ -194,6 +208,14 @@
   (ivy-rich-mode 1)
   :config
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
+(use-package ivy-prescient
+  :after counsel
+  :custom
+  (ivy-prescient-enable-filtering nil)
+  :config
+  ;; Uncomment the following line to have sorting remembered across sessions!
+  (prescient-persist-mode 1)
+  (ivy-prescient-mode 1))
 (use-package ag
   ;; :config
   ;; (setq ag-arguments '("--smart-case" "--nogroup" "--ignore-dir=node_modules" "--ignore-dir=.cask" "--ignore-dir=backups" "--ignore-dir=tmp" "--ignore=projectile.cache" "--ignore-dir=coverage" "--ignore-dir=public/assets" "--"))
@@ -260,22 +282,6 @@
   (yas-reload-all))
 (use-package yasnippet-snippets
   :ensure t)
-;; (use-package solarized-theme
-;;   :ensure t
-;;   :defer t
-;;   :init (load-theme 'solarized-dark t))
-;; (use-package color-theme-sanityinc-tomorrow
-;;   :ensure t)
-;; ;; (use-package badger-theme
-;; ;;   :ensure t
-;; ;;   :config (load-theme 'badger t))
-;; (use-package alect-themes
-;;   :ensure t
-;;   :defer t
-;;   :init (load-theme 'alect-dark t))
-(use-package darcula-theme
-  :ensure t)
-;;  :init (load-theme 'darcula))
 (use-package tide
   :ensure t
   :config (progn
@@ -321,10 +327,12 @@
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
 ;; optional if you want which-key integration
+
 (use-package which-key
-  :ensure t
+  :init (which-key-mode)
+  :diminish which-key-mode
   :config
-  (which-key-mode))
+  (setq which-key-idle-delay 1))
 
 ;; Enable scala-mode for highlighting, indentation and motion commands
 (use-package scala-mode
@@ -352,10 +360,6 @@
   ;; :config (setq lsp-metals-treeview-show-when-views-received t)
   )
 
-(use-package doom-modeline
-  :init
-  (doom-modeline-mode 1))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -363,8 +367,33 @@
  ;; If there is more than one, they won't work right.
  '(ag-highlight-search t)
  '(ag-ignore-list '("builds/" "*.min.js" "dist/"))
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
  '(coffee-args-repl '("-i" "NODE_NO_READLINE=1"))
+ '(compilation-message-face 'default)
  '(css-indent-offset 2)
+ '(cua-global-mark-cursor-color "#2aa198")
+ '(cua-overwrite-cursor-color "#b58900")
+ '(cua-read-only-cursor-color "#859900")
+ '(fci-rule-color "#073642")
+ '(highlight-changes-colors '("#d33682" "#6c71c4"))
+ '(highlight-symbol-colors
+   '("#3b6b40f432d6" "#07b9463c4d36" "#47a3341e358a" "#1d873c3f56d5" "#2d86441c3361" "#43b7362d3199" "#061d417f59d7"))
+ '(highlight-symbol-foreground-color "#93a1a1")
+ '(highlight-tail-colors
+   '(("#073642" . 0)
+     ("#5b7300" . 20)
+     ("#007d76" . 30)
+     ("#0061a8" . 50)
+     ("#866300" . 60)
+     ("#992700" . 70)
+     ("#a00559" . 85)
+     ("#073642" . 100)))
+ '(hl-bg-colors
+   '("#866300" "#992700" "#a7020a" "#a00559" "#243e9b" "#0061a8" "#007d76" "#5b7300"))
+ '(hl-fg-colors
+   '("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36"))
+ '(hl-paren-colors '("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900"))
  '(ispell-program-name "aspell")
  '(js-indent-level 2)
  '(js2-mirror-mode t)
@@ -372,14 +401,50 @@
  '(lintnode-port 3000)
  '(lsp-metals-show-implicit-arguments t)
  '(lsp-metals-show-inferred-type t)
+ '(lsp-ui-doc-border "#93a1a1")
  '(magit-rebase-arguments '("--autosquash"))
+ '(nrepl-message-colors
+   '("#dc322f" "#cb4b16" "#b58900" "#5b7300" "#b3c34d" "#0061a8" "#2aa198" "#d33682" "#6c71c4"))
  '(package-selected-packages
-   '(ivy-rich yasnippet-snippets which-key web-mode use-package tide solarized-theme scala-mode sbt-mode rspec-mode powerline pcre2el multiple-cursors magit lsp-ui lsp-metals lsp-ivy json-mode js2-mode helm-lsp expand-region exec-path-from-shell ess enh-ruby-mode doom-modeline dockerfile-mode darcula-theme counsel-projectile copy-as-format coffee-mode bundler browse-at-remote ag))
+   '(lsp-metals sbt-mode scala-mode which-key dap-mode posframe lsp-ivy lsp-ui lsp-mode tide yasnippet-snippets yasnippet dockerfile-mode ess pcre2el magit counsel-projectile projectile ag ivy-prescient ivy-rich counsel browse-at-remote copy-as-format multiple-cursors flycheck markdown-mode rspec-mode bundler enh-ruby-mode web-mode coffee-mode json-mode js2-mode doom-themes doom-modeline all-the-icons exec-path-from-shell use-package))
+ '(pos-tip-background-color "#073642")
+ '(pos-tip-foreground-color "#93a1a1")
  '(rspec-use-bundler-when-possible nil)
  '(send-mail-function 'mailclient-send-it)
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
+ '(term-default-bg-color "#002b36")
+ '(term-default-fg-color "#839496")
  '(typescript-indent-level 2)
+ '(vc-annotate-background nil)
+ '(vc-annotate-background-mode nil)
+ '(vc-annotate-color-map
+   '((20 . "#dc322f")
+     (40 . "#cb4366eb20b4")
+     (60 . "#c1167942154f")
+     (80 . "#b58900")
+     (100 . "#a6ae8f7c0000")
+     (120 . "#9ed892380000")
+     (140 . "#96be94cf0000")
+     (160 . "#8e5397440000")
+     (180 . "#859900")
+     (200 . "#77679bfc4635")
+     (220 . "#6d449d465bfd")
+     (240 . "#5fc09ea47092")
+     (260 . "#4c68a01784aa")
+     (280 . "#2aa198")
+     (300 . "#303498e7affc")
+     (320 . "#2fa1947cbb9b")
+     (340 . "#2c879008c736")
+     (360 . "#268bd2")))
+ '(vc-annotate-very-old-color nil)
  '(vue-html-extra-indent 2)
  '(web-mode-code-indent-offset 2)
+ '(weechat-color-list
+   '(unspecified "#002b36" "#073642" "#a7020a" "#dc322f" "#5b7300" "#859900" "#866300" "#b58900" "#0061a8" "#268bd2" "#a00559" "#d33682" "#007d76" "#2aa198" "#839496" "#657b83"))
+ '(xterm-color-names
+   ["#073642" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#eee8d5"])
+ '(xterm-color-names-bright
+   ["#002b36" "#cb4b16" "#586e75" "#657b83" "#839496" "#6c71c4" "#93a1a1" "#fdf6e3"])
  '(yas/trigger-key nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
