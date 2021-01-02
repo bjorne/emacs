@@ -136,7 +136,6 @@
   (setq flycheck-disabled-checkers '(ruby-rubocop ruby-rubylint))
   :config
   (progn
-    (setq flycheck-display-errors-function nil)
     (add-hook 'after-init-hook 'global-flycheck-mode)))
 (use-package multiple-cursors
   :config
