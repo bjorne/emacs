@@ -1,5 +1,6 @@
 (when (string-equal system-type "darwin")
-    (set-default-font "-apple-Monaco-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1"))
+      (add-to-list 'default-frame-alist
+                       '(font . "-apple-Monaco-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1")))
 
 (global-auto-revert-mode t)
 
