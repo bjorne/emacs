@@ -166,6 +166,7 @@
     (global-set-key (kbd "<f6>") 'ivy-resume)
     (global-set-key (kbd "M-i") 'ivy-imenu-anywhere)
     (global-set-key (kbd "M-x") 'counsel-M-x)
+    (global-set-key (kbd "C-x b") 'counsel-switch-buffer)
     (global-set-key (kbd "C-x C-f") 'counsel-find-file)
     (global-set-key (kbd "<f1> f") 'counsel-describe-function)
     (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
