@@ -14,3 +14,6 @@ elpa/
 /eshell
 /ido.last
 /recentf
+/.dap-breakpoints
+/.lsp-session-v1
+/transient/
