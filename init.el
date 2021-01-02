@@ -386,6 +386,8 @@
  '(js2-mirror-mode t)
  '(json-reformat:indent-width 2)
  '(lintnode-port 3000)
+ '(lsp-metals-show-implicit-arguments t)
+ '(lsp-metals-show-inferred-type t)
  '(magit-rebase-arguments '("--autosquash"))
  '(package-selected-packages
    '(lsp-metals sbt-mode which-key dap-mode lsp-treemacs lsp-ivy helm-lsp lsp-ui lsp-mode ess darcula-theme alect-themes color-theme-sanityinc-tomorrow solarized-theme badger-theme spacemacs-theme scala-mode jq-mode graphql-mode vue-mode esup ansible markdown-preview-mode dash magithub tide company smartparens nvm yasnippet-snippets apib-mode dockerfile-mode pcre2el bundler ruby-tools enh-ruby-mode eslint-fix ggtags avy magit-filenotify browse-at-remote copy-as-format flymd js-auto-beautify rjsx-mode gh-md typescript-mode counsel-projectile lorem-ipsum iedit rbenv ivy-hydra counsel ivy-bibtex flyspell-correct-ivy ivy yasnippet yaml-mode wrap-region web-mode use-package textmate smex scratch rspec-mode restclient projectile prodigy powerline paredit pallet osx-dictionary multiple-cursors markdown-mode mark-multiple magit-gh-pulls json-mode js2-mode js-comint jade-mode imenu-anywhere idle-highlight-mode highlight-indentation haml-mode google-maps gist free-keys flycheck expand-region exec-path-from-shell evm evil drag-stuff discover coffee-mode ag actionscript-mode ace-jump-mode))
