@@ -7,9 +7,6 @@
 
 (global-unset-key (kbd "C-x C-z"))
 
-(require 'imenu-anywhere)
-(global-set-key (kbd "C-.") 'imenu-anywhere)
-
 ;; drag stuff
 (global-set-key (kbd "M-n") 'drag-stuff-down)
 (global-set-key (kbd "M-p") 'drag-stuff-up)
@@ -26,8 +23,8 @@
 (global-set-key (kbd "<f10>") 'kill-buffer)
 (global-set-key (kbd "<f11>") 'kill-buffer-and-window)
 
-(require 'ace-jump-mode)
-(global-set-key (kbd "M-h") 'ace-jump-mode)
+;; (require 'ace-jump-mode)
+;;(global-set-key (kbd "M-h") 'ace-jump-mode)
 (global-set-key (kbd "C-c q") 'join-line)
 (global-set-key (kbd "C-a") 'back-to-indentation-or-beginning-of-line)
 (global-set-key (kbd "C-s-f") 'cycle-files-with-same-suffix)

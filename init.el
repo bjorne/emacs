@@ -8,12 +8,6 @@
 
 ;; PATH
 
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-;; (package-initialize)
-
 (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
 
 ;; Start in $HOME
@@ -29,23 +23,32 @@
 (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
   (when (fboundp mode) (funcall mode -1)))
 
-(require 'cask (concat bjorne-root "vendor/cask/cask.el"))
-(cask-initialize)
-(require 'pallet)
-(pallet-mode t)
-
-(load-theme 'bjorne t)
-
-
-;; colors!
-; (require 'color-theme-bjorne)
-; (color-theme-bjorne)
-
 (require 'bjorne-defuns)
 (require 'bjorne-misc)
 (require 'bjorne-bindings)
 
+
+;; Initialize package sources
+(require 'package)
+
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("org" . "https://orgmode.org/elpa/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
+
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+  ;; Initialize use-package on non-Linux platforms
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
 (require 'use-package)
+(setq use-package-always-ensure t)
+
+(use-package solarized-theme
+  :init
+  (load-theme 'solarized-dark t))
 
 (use-package exec-path-from-shell
   :init
@@ -140,14 +143,9 @@
 (use-package multiple-cursors
   :config
   (setq mc/list-file (concat var-dir "mc-lists.el")))
-(use-package uniquify)
-(use-package saveplace
-  :init
-  (setq save-place t))
-(use-package expand-region
-  :ensure t
-  :config
-  (global-set-key (kbd "C-=") 'er/expand-region))
+;; (use-package saveplace
+;;   :init
+;;   (setq save-place t))
 (use-package copy-as-format)
 (use-package browse-at-remote
   :config
@@ -159,6 +157,18 @@
   :config
   (progn
     (ivy-mode 1)
+    (defun ivy-magit-dir (x)
+      (print (concat "dir" (magit-toplevel (if (f-dir-p x) x (f-dirname x)))))
+      (with-ivy-window
+       (magit-status-internal (magit-toplevel (if (f-dir-p x) x (f-dirname x))))))
+
+    (require 'ivy)
+    (ivy-set-actions
+     'dired
+     '(("g" ivy-magit-dir "magit")))
+    (ivy-set-actions
+     'counsel-find-file
+     '(("g" ivy-magit-dir "magit")))
     (setq ivy-use-virtual-buffers t)
     (setq ivy-extra-directories nil)
     (global-set-key "\C-s" 'swiper)
@@ -179,6 +189,11 @@
     (global-set-key (kbd "C-x l") 'counsel-locate)
     (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
     (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
+(use-package ivy-rich
+  :init
+  (ivy-rich-mode 1)
+  :config
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 (use-package ag
   ;; :config
   ;; (setq ag-arguments '("--smart-case" "--nogroup" "--ignore-dir=node_modules" "--ignore-dir=.cask" "--ignore-dir=backups" "--ignore-dir=tmp" "--ignore=projectile.cache" "--ignore-dir=coverage" "--ignore-dir=public/assets" "--"))
@@ -206,24 +221,7 @@
 (use-package counsel-projectile
   :ensure t
   :init (counsel-projectile-mode))
-(use-package powerline
-   :config
-   (progn
-;;     (set-face-background 'powerline-active1 "gray18")
-     ;; (set-face-background 'powerline-active2 "DarkGreen")
-;;     (set-face-foreground 'powerline-active1 "white")
-;;     (set-face-foreground 'powerline-active2 "white")
-     (set-face-background 'mode-line "ForestGreen")
-;;     (set-face-foreground 'mode-line "white")
-;;     (set-face-attribute 'mode-line-inactive nil :box nil)
-;;     (set-face-background 'powerline-inactive1 "gray22")
-;;     (set-face-background 'powerline-inactive2 "gray11")
-     (powerline-default-theme)))
 (use-package magit
-  :init
-  (progn
-    (use-package magit-blame)
-    (bind-key "C-c C-a" 'magit-just-amend magit-mode-map))
   :config
   (progn
     (setq magit-completing-read-function 'ivy-completing-read)
@@ -242,14 +240,6 @@
   :bind
   (("C-c g" . magit-status)
    ("C-c b" . magit-blame)))
-(use-package magithub
-  :disabled t
-  :ensure t
-  :after magit
-  :config
-  (magithub-feature-autoinject t)
-  (setq magithub-cache-file (concat var-dir "magithub/cache"))
-  (setq magithub-clone-default-directory "~/Code"))
 (use-package re-builder
   :config
   (progn
@@ -314,11 +304,8 @@
 
 ;; optionally
 (use-package lsp-ui :commands lsp-ui-mode :ensure t)
-;; if you are helm user
-(use-package helm-lsp :commands helm-lsp-workspace-symbol :ensure t)
 ;; if you are ivy user
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol :ensure t)
-(use-package lsp-treemacs :commands lsp-treemacs-errors-list :ensure t)
 
 ;; Use the Debug Adapter Protocol for running tests and debugging
 (use-package posframe
@@ -362,7 +349,12 @@
 ;; Add metals backend for lsp-mode
 (use-package lsp-metals
   :ensure t
-  :config (setq lsp-metals-treeview-show-when-views-received t))
+  ;; :config (setq lsp-metals-treeview-show-when-views-received t)
+  )
+
+(use-package doom-modeline
+  :init
+  (doom-modeline-mode 1))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -373,10 +365,8 @@
  '(ag-ignore-list '("builds/" "*.min.js" "dist/"))
  '(coffee-args-repl '("-i" "NODE_NO_READLINE=1"))
  '(css-indent-offset 2)
- '(custom-safe-themes
-   '("13a8eaddb003fd0d561096e11e1a91b029d3c9d64554f8e897b2513dbf14b277" "830877f4aab227556548dc0a28bf395d0abe0e3a0ab95455731c9ea5ab5fe4e1" "7f1d414afda803f3244c6fb4c2c64bea44dac040ed3731ec9d75275b9e831fe5" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "7356632cebc6a11a87bc5fcffaa49bae528026a78637acd03cae57c091afd9b9" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" "5bf3ccac54dc36ab72bbc891d4e1e7c5f4190abab1d6c1084550e3184867709d" "41c8c11f649ba2832347fe16fe85cf66dafe5213ff4d659182e25378f9cfc183" "675c0a75d42b42ed963e426b3d8582ec719742b9033179b8d8fef89fae0dfbff" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default))
  '(ispell-program-name "aspell")
- '(js2-basic-offset 2)
+ '(js-indent-level 2)
  '(js2-mirror-mode t)
  '(json-reformat:indent-width 2)
  '(lintnode-port 3000)
@@ -384,7 +374,7 @@
  '(lsp-metals-show-inferred-type t)
  '(magit-rebase-arguments '("--autosquash"))
  '(package-selected-packages
-   '(lsp-metals sbt-mode which-key dap-mode lsp-treemacs lsp-ivy helm-lsp lsp-ui lsp-mode ess darcula-theme alect-themes color-theme-sanityinc-tomorrow solarized-theme badger-theme spacemacs-theme scala-mode jq-mode graphql-mode vue-mode esup ansible markdown-preview-mode dash magithub tide company smartparens nvm yasnippet-snippets apib-mode dockerfile-mode pcre2el bundler ruby-tools enh-ruby-mode eslint-fix ggtags avy magit-filenotify browse-at-remote copy-as-format flymd js-auto-beautify rjsx-mode gh-md typescript-mode counsel-projectile lorem-ipsum iedit rbenv ivy-hydra counsel ivy-bibtex flyspell-correct-ivy ivy yasnippet yaml-mode wrap-region web-mode use-package textmate smex scratch rspec-mode restclient projectile prodigy powerline paredit pallet osx-dictionary multiple-cursors markdown-mode mark-multiple magit-gh-pulls json-mode js2-mode js-comint jade-mode imenu-anywhere idle-highlight-mode highlight-indentation haml-mode google-maps gist free-keys flycheck expand-region exec-path-from-shell evm evil drag-stuff discover coffee-mode ag actionscript-mode ace-jump-mode))
+   '(ivy-rich yasnippet-snippets which-key web-mode use-package tide solarized-theme scala-mode sbt-mode rspec-mode powerline pcre2el multiple-cursors magit lsp-ui lsp-metals lsp-ivy json-mode js2-mode helm-lsp expand-region exec-path-from-shell ess enh-ruby-mode doom-modeline dockerfile-mode darcula-theme counsel-projectile copy-as-format coffee-mode bundler browse-at-remote ag))
  '(rspec-use-bundler-when-possible nil)
  '(send-mail-function 'mailclient-send-it)
  '(typescript-indent-level 2)

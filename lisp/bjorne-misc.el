@@ -67,9 +67,6 @@
 ;;   (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
 ;; (add-hook 'ido-setup-hook 'ido-define-keys)
 
-(setq smex-save-file (concat var-dir ".smex-items"))
-(smex-initialize)
-
 (set-default 'indent-tabs-mode nil)
 (set-default 'indicate-empty-lines t)
 (set-default 'imenu-auto-rescan t)
@@ -113,18 +110,5 @@
         (ruby . t)
         (perl . t)
         (python .t)))
-
-(defun ivy-magit-dir (x)
-  (print (concat "dir" (magit-toplevel (if (f-dir-p x) x (f-dirname x)))))
-  (with-ivy-window
-    (magit-status-internal (magit-toplevel (if (f-dir-p x) x (f-dirname x))))))
-
-(require 'ivy)
-(ivy-set-actions
- 'dired
- '(("g" ivy-magit-dir "magit")))
-(ivy-set-actions
- 'counsel-find-file
- '(("g" ivy-magit-dir "magit")))
 
 (provide 'bjorne-misc)
