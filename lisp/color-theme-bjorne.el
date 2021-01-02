@@ -1,6 +1,6 @@
 ;; All patches welcome
 
-(require 'color-theme)
+; (require 'color-theme)
 
 ;;;###autoload
 (defun color-theme-bjorne ()
