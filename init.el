@@ -385,6 +385,25 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
+
+(use-package dired
+  :ensure nil
+  :commands (dired dired-jump)
+  :bind (("C-x C-j" . dired-jump)))
+  ;; :custom ((dired-listing-switches "-al --group-directories-first")))
+
+(use-package dired-single
+  :bind
+  (:map dired-mode-map (
+                        ([remap dired-find-file] . dired-single-buffer)
+                        ([remap dired-mouse-find-file-other-window] . dired-single-buffer-mouse)
+                        ([remap dired-up-directory] . dired-single-up-directory))))
+
+
+(use-package all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode))
+
+
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8-unix)
 
