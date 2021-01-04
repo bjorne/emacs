@@ -247,18 +247,10 @@
   :config
   (progn
     (setq magit-completing-read-function 'ivy-completing-read)
-    (setq magit-repository-directories '("~/Code"))
     (setq magit-branch-arguments nil)
     (setq magit-process-popup-time 1)
     (setq magit-diff-refine-hunk t)
-    (magit-define-popup-action 'magit-rebase-popup
-      ?M "master\n" (lambda ()
-                      (interactive)
-                      (magit-rebase "master" (magit-rebase-arguments))) ?e t)
-    (magit-define-popup-action 'magit-rebase-popup
-      ?o "origin/master\n" (lambda ()
-                      (interactive)
-                      (magit-rebase "origin/master" (magit-rebase-arguments))) ?M))
+    )
   :bind
   (("C-c g" . magit-status)
    ("C-c b" . magit-blame)))
