@@ -462,7 +462,7 @@
  '(nrepl-message-colors
    '("#dc322f" "#cb4b16" "#b58900" "#5b7300" "#b3c34d" "#0061a8" "#2aa198" "#d33682" "#6c71c4"))
  '(package-selected-packages
-   '(lsp-metals sbt-mode scala-mode which-key dap-mode posframe lsp-ivy lsp-ui lsp-mode tide yasnippet-snippets yasnippet dockerfile-mode ess pcre2el magit counsel-projectile projectile ag ivy-prescient ivy-rich counsel browse-at-remote copy-as-format multiple-cursors flycheck markdown-mode rspec-mode bundler enh-ruby-mode web-mode coffee-mode json-mode js2-mode doom-themes doom-modeline all-the-icons exec-path-from-shell use-package))
+   '(all-the-icons-dired dired-single helpful no-littering vterm eshell-git-prompt company lsp-metals sbt-mode scala-mode which-key dap-mode posframe lsp-ivy lsp-ui lsp-mode tide yasnippet-snippets yasnippet dockerfile-mode ess pcre2el magit counsel-projectile projectile ag ivy-prescient ivy-rich counsel browse-at-remote copy-as-format multiple-cursors flycheck markdown-mode rspec-mode bundler enh-ruby-mode web-mode coffee-mode json-mode js2-mode doom-themes doom-modeline all-the-icons exec-path-from-shell use-package))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(rspec-use-bundler-when-possible nil)
