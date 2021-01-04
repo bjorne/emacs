@@ -224,9 +224,6 @@
   :init (projectile-global-mode 1)
   :config
   (progn
-    (define-key projectile-mode-map (kbd "C-c p t") 'projectile-toggle-test-code)
-    ;; (define-key projectile-mode-map (kbd "C-c p g") 'ag-project)
-    ;; (define-key projectile-mode-map (kbd "C-c p f") 'projectile-find-file)
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
     (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
     (setq projectile-enable-caching t) 
@@ -238,7 +235,6 @@
     (add-to-list 'projectile-globally-ignored-files "*.bundle.js")
     (add-to-list 'projectile-globally-ignored-files "dist/"))
   :bind (:map projectile-mode-map
-              ("C-c p t" . projectile-toggle-test-code)
               ("C-c p g" . ag-project)))
 (use-package counsel-projectile
   :ensure t
