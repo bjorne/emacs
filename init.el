@@ -27,7 +27,6 @@
 (require 'bjorne-misc)
 (require 'bjorne-bindings)
 
-
 ;; Initialize package sources
 (require 'package)
 
@@ -67,7 +66,7 @@
 
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
-  
+
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
@@ -228,7 +227,7 @@
   (progn
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
     (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
-    (setq projectile-enable-caching t) 
+    (setq projectile-enable-caching t)
     (setq projectile-completion-system 'ivy)
     (setq projectile-cache-file (concat var-dir "projectile.cache"))
     (setq projectile-known-projects-file (concat var-dir "projectile-bookmarks.eld"))
