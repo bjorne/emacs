@@ -51,6 +51,8 @@
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)))
 
+(use-package no-littering)
+
 (use-package all-the-icons)
 (use-package doom-modeline
   :init
