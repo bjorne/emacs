@@ -242,6 +242,8 @@
   :ensure t
   :init (counsel-projectile-mode))
 (use-package magit
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   :config
   (progn
     (setq magit-completing-read-function 'ivy-completing-read)
