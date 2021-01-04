@@ -274,19 +274,6 @@
   (yas-reload-all))
 (use-package yasnippet-snippets
   :ensure t)
-(use-package tide
-  :ensure t
-  :config (progn
-            (setq company-tooltip-align-annotations t)
-            ;; (add-hook 'before-save-hook 'tide-format-before-save)
-            (add-hook 'typescript-mode-hook (lambda ()
-                                              (interactive)
-                                              (tide-setup)
-                                              (flycheck-mode +1)
-                                              (eldoc-mode +1)
-                                              (tide-hl-identifier-mode +1)
-                                              (company-mode +1)))))
-
 ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
 (setq lsp-keymap-prefix "s-l")
 
