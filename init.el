@@ -356,6 +356,18 @@
   ;; :config (setq lsp-metals-treeview-show-when-views-received t)
   )
 
+(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8-unix)
+
+;; set a default font
+(when (member "DejaVu Sans Mono" (font-family-list))
+  (set-face-attribute 'default nil :font "DejaVu Sans Mono-16"))
+
+;; specify font for all unicode characters
+(when (member "Symbola" (font-family-list))
+  (set-fontset-font t 'unicode "Symbola" nil 'prepend))
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
