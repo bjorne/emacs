@@ -7,10 +7,6 @@
 
 (global-unset-key (kbd "C-x C-z"))
 
-;; drag stuff
-(global-set-key (kbd "M-n") 'drag-stuff-down)
-(global-set-key (kbd "M-p") 'drag-stuff-up)
-
 (global-set-key (kbd "C-n") 'next-line)
 (global-set-key (kbd "C-p") 'previous-line)
 
@@ -69,7 +65,5 @@
 
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "M-O") 'other-window-backwards)
-
-(global-set-key (kbd "C-<tab>") 'indent-as-previous)
 
 (provide 'bjorne-bindings)
