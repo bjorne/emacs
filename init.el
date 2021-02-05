@@ -470,6 +470,19 @@
   :hook (dired-mode . all-the-icons-dired-mode))
 
 
+(use-package browse-at-remote
+  :custom
+  (browse-at-remote-remote-type-domains '(("bitbucket.org" . "bitbucket")
+                                         ("github.com" . "github")
+                                         ("gitlab.com" . "gitlab")
+                                         ("git.savannah.gnu.org" . "gnu")
+                                         ("gist.github.com" . "gist")
+                                         ("ghe.spotify.net" . "github"))))
+
+(use-package browse-kill-ring)
+
+;; Font and style
+
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8-unix)
 
