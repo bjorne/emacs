@@ -276,7 +276,8 @@
     (add-to-list 'projectile-globally-ignored-files ".DS_Store")
     (add-to-list 'projectile-globally-ignored-files "*.min.js*")
     (add-to-list 'projectile-globally-ignored-files "*.bundle.js")
-    (add-to-list 'projectile-globally-ignored-files "dist/"))
+    (add-to-list 'projectile-globally-ignored-directories "dist")
+    (add-to-list 'projectile-globally-ignored-directories ".bloop"))
   :bind (:map projectile-mode-map
               ("C-c p g" . ag-project)))
 (use-package counsel-projectile
