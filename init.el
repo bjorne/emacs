@@ -399,6 +399,9 @@
 ;; Add metals backend for lsp-mode
 (use-package lsp-metals
   :ensure t
+  :custom
+  (lsp-metals-show-implicit-arguments t)
+  (lsp-metals-show-inferred-type t)
   ;; :config (setq lsp-metals-treeview-show-when-views-received t)
   )
 
