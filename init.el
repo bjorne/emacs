@@ -318,6 +318,15 @@
 ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
 (setq lsp-keymap-prefix "s-l")
 
+(use-package python-mode
+  :ensure nil
+  :commands python-mode
+  :config
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (setq indent-tabs-mode t)
+              (setq tab-width 4))))
+
 (use-package lsp-mode
   :ensure t
   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
@@ -332,6 +341,18 @@
 (use-package lsp-ui :commands lsp-ui-mode :ensure t)
 ;; if you are ivy user
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol :ensure t)
+
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred
+
+(use-package elpy
+  :ensure t
+  :defer t
+  :init
+  (advice-add 'python-mode :before 'elpy-enable))
 
 ;; Use the Debug Adapter Protocol for running tests and debugging
 (use-package posframe
