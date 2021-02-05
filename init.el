@@ -386,9 +386,6 @@
   ;; Truncate buffer for performance
   (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
 
-  ;; this doesn't work and I don't know why
-  (define-key eshell-mode-map (kbd "M-r") 'counsel-esh-history)
-
   (setq eshell-history-size         10000
         eshell-buffer-maximum-lines 10000
         eshell-hist-ignoredups t
@@ -399,12 +396,13 @@
 (use-package eshell
   :hook
   (eshell-first-time-mode . efs/configure-eshell)
-  (eshell-mode . (lambda () (define-key eshell-hist-mode-map (kbd "M-r") 'counsel-esh-history)))
   :config
   (with-eval-after-load 'esh-opt
     (setq eshell-destroy-buffer-when-process-dies t)
     (setq eshell-visual-commands '("htop" "zsh" "vim")))
-  (eshell-git-prompt-use-theme 'robbyrussell))
+  (eshell-git-prompt-use-theme 'robbyrussell)
+  :bind
+  ([remap eshell-previous-matching-input] . counsel-esh-history))
 
 (use-package vterm
   :commands vterm
