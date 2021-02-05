@@ -94,6 +94,7 @@
                          (0 (progn (compose-region (match-beginning 1)
                                                    (match-end 1) "\u0192")
                                    nil))))))))
+
 (use-package json-mode
   :mode (("\\.json" . json-mode))
   :config (add-hook 'json-mode-hook 'bjorne-coding-hook))
@@ -106,16 +107,56 @@
                 (bind-key "C-j" 'coffee-newline-and-indent coffee-mode-map)
                 (setq coffee-tab-width 2)))))
 (use-package web-mode
-  :init (progn
-          (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-          (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+  :mode (("\\.js\\'" . web-mode)
+         ("\\.jsx\\'" . web-mode)
+         ("\\.ts\\'" . web-mode)
+         ("\\.tsx\\'" . web-mode)
+         ("\\.html\\'" . web-mode)
+         ("\\.vue\\'" . web-mode)
+	 ("\\.json\\'" . web-mode)
+;;         ("\\.erb\\'"  . web-mode)
+         ("\\.html?\\'"  . web-mode))
   :config (progn
             (add-hook 'web-mode-hook
                       (lambda ()
                         (setq web-mode-enable-css-colorization t)
                         (setq web-mode-markup-indent-offset 2)
                         (setq web-mode-style-padding 2)
-                        (setq web-mode-script-padding 2)))))
+                        (setq web-mode-script-padding 2)))
+            (flycheck-add-mode 'javascript-eslint 'web-mode))
+  :commands web-mode
+  :config
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
+
+  (setq web-mode-content-types-alist
+	'(("jsx" . "\\.js[x]?\\'"))))
+
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  
+
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+
+(use-package tide
+  :config
+  (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
+  :custom (tide-tsserver-process-environment)
+  :hook (web-mode . (lambda ()
+            (when (string-match-p "jsx?\\|tsx?" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+  )
+
+(use-package prettier
+  :init (global-prettier-mode))
 
 (use-package enh-ruby-mode
   :ensure t
