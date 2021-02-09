@@ -481,6 +481,9 @@
 
 (use-package browse-kill-ring)
 
+(use-package yaml-mode
+  :mode (("\\.ya?ml" . yaml-mode)))
+
 ;; Font and style
 
 (set-language-environment "UTF-8")
