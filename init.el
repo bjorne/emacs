@@ -303,6 +303,10 @@
   :bind
   (("C-c g" . magit-status)
    ("C-c b" . magit-blame)))
+(use-package forge
+  :after magit
+  :config
+  (add-to-list 'forge-alist '("ghe.spotify.net" "ghe.spotify.net/api/v3" "ghe.spotify.net" forge-github-repository)))
 (use-package re-builder
   :config
   (progn
