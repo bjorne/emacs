@@ -492,6 +492,13 @@
 (use-package yaml-mode
   :mode (("\\.ya?ml" . yaml-mode)))
 
+(use-package graphviz-dot-mode
+  :ensure t
+  :config
+  (setq graphviz-dot-indent-width 4))
+
+;; (use-package company-graphviz-dot)
+
 ;; Font and style
 
 (set-language-environment "UTF-8")
