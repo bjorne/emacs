@@ -20,7 +20,7 @@
 (add-to-list 'load-path (concat bjorne-root "vendor/"))
 
 ;; Turn off mouse interface early in startup to avoid momentary display
-(dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
+(dolist (mode '(tool-bar-mode scroll-bar-mode))
   (when (fboundp mode) (funcall mode -1)))
 
 (require 'bjorne-defuns)
