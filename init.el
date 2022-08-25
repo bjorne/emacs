@@ -438,13 +438,27 @@
   :bind
   ([remap eshell-previous-matching-input] . counsel-esh-history))
 
+
+(defun vterm-counsel-yank-pop-action (orig-fun &rest args)
+  (if (equal major-mode 'vterm-mode)
+      (let ((inhibit-read-only t)
+            (yank-undo-function (lambda (_start _end) (vterm-undo))))
+        (cl-letf (((symbol-function 'insert-for-yank)
+                   (lambda (str) (vterm-send-string str t))))
+          (apply orig-fun args)))
+    (apply orig-fun args)))
+
 (use-package vterm
   :commands vterm
   :config
   (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")  ;; Set this to match your custom shell prompt
   ;;(setq vterm-shell "zsh")                       ;; Set this to customize the shell to launch
   (setq vterm-max-scrollback 10000)
-  (setq vterm-buffer-name-string "vt %s"))
+  (setq vterm-buffer-name-string "vt %s")
+  :bind
+  (("C-S-y" . vterm-yank))
+  :init
+  (advice-add 'counsel-yank-pop-action :around #'vterm-counsel-yank-pop-action))
 
 
 (use-package helpful
