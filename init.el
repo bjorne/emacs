@@ -155,8 +155,7 @@
               (setup-tide-mode))))
   )
 
-(use-package prettier
-  :init (global-prettier-mode))
+(use-package prettier)
 
 (use-package enh-ruby-mode
   :ensure t
@@ -333,6 +332,7 @@
   :config
   (add-hook 'python-mode-hook
             (lambda ()
+              (prettier-mode)
               (setq indent-tabs-mode t)
               (setq tab-width 4))))
 
