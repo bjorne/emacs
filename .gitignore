@@ -17,3 +17,4 @@ elpa/
 /.dap-breakpoints
 /.lsp-session-v1
 /transient/
+/elpy/
