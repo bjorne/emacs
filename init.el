@@ -519,6 +519,10 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
+(require 'auth-source)
+(setq auth-sources  '(macos-keychain-internet))
+;; (setq auth-source-debug 'trivia)
+
 (put 'narrow-to-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
