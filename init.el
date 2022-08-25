@@ -207,6 +207,13 @@
   :config
   (setq browse-at-remote-prefer-symbolic nil)
   (global-set-key (kbd "C-c n") 'browse-at-remote))
+
+(defun bjorne/counsel-yank-or-yank-pop (&optional arg)
+  "Call `counsel-yank-pop'. If called after a yank, call `yank-pop' instead."
+  (interactive "*p")
+  (if (eq last-command 'yank)
+      (yank-pop arg)
+    (counsel-yank-pop)))
 (use-package counsel
   :demand t)
 (use-package ivy
@@ -233,7 +240,7 @@
     (global-set-key (kbd "C-c C-r") 'ivy-resume)
     (global-set-key (kbd "<f6>") 'ivy-resume)
     (global-set-key (kbd "M-x") 'counsel-M-x)
-    (global-set-key (kbd "C-x b") 'counsel-switch-buffer)
+    (global-set-key (kbd "C-x b") 'switch-to-buffer)
     (global-set-key (kbd "C-x C-f") 'counsel-find-file)
     (global-set-key (kbd "<f1> f") 'counsel-describe-function)
     (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
@@ -245,6 +252,7 @@
     (global-set-key (kbd "C-c k") 'counsel-ag)
     (global-set-key (kbd "C-x l") 'counsel-locate)
     (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+    (global-set-key (kbd "M-y") 'bjorne/counsel-yank-or-yank-pop)
     (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
 (use-package ivy-rich
   :init
