@@ -37,6 +37,8 @@
 (global-set-key (kbd "C-M-s") 'isearch-forward)
 (global-set-key (kbd "C-M-r") 'isearch-backward)
 
+(global-set-key (kbd "C-M-<backspace>") 'backward-kill-sexp)
+
 ;; mark multiple
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
