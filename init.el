@@ -31,7 +31,6 @@
 (require 'package)
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("org" . "https://orgmode.org/elpa/")
                          ("elpa" . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
@@ -661,7 +660,53 @@
   :config
   (setq graphviz-dot-indent-width 4))
 
-;; (use-package company-graphviz-dot)
+
+(defun my-org-category-from-denote-title ()
+  "Set the buffer local variable org-category based on the denote title of the current buffer."
+  (make-variable-buffer-local 'org-category)
+  (when
+      (string-prefix-p denote-directory (buffer-file-name))
+    (setq org-category (denote--retrieve-value-title (buffer-file-name)))))
+
+(use-package org
+  :after denote
+  :config
+  (setq org-agenda-files (list denote-directory))
+  (setq org-agenda-prefix-format '((agenda . " %i %-25:c%?-12t% s")
+                                   (todo . " %i %-25:c%?-12t% s")
+                                   (tags . " %i %-25:c")
+                                   (search . " %i %-25:c")))
+  (advice-add #'org-refresh-category-properties :before #'my-org-category-from-denote-title))
+
+(use-package denote
+  :config
+  (setq denote-directory (expand-file-name "~/denote/"))
+  (setq denote-known-keywords '("emacs"))
+  (setq denote-dired-directories
+        (list denote-directory))
+  (add-hook 'dired-mode-hook #'denote-dired-mode-in-directories))
+
+;; might not be needed from denote 0.6.0+, instead use denote-date-prompt-use-org-read-date
+(defun journal-new (date-string)
+  "Create an entry tagged 'journal' with the date based on DATE-STRING as its title."
+  (interactive (list (org-read-date))) ; (read-string "Date YYYY-MM-DD: " (format-time-string "%Y-%m-%d"))))
+    (denote
+     (format-time-string "%a %b %e %Y" (encode-time (iso8601-parse (concat date-string "T00:00:00Z"))))
+     '("journal")
+     nil
+     nil
+     date-string))
+
+
+(defun journal-find-or-create (date-string)
+  "Find existing or create new entry tagged 'journal' with the date based on DATE-STRING as its title."
+  (interactive (list (org-read-date))) ; (read-string "Date YYYY-MM-DD: " (format-time-string "%Y-%m-%d"))))
+  (let* ((parsed-time (encode-time (iso8601-parse (concat date-string "T00:00:00Z"))))
+         (file-regexp (format-time-string "^%Y%m%d.*_journal" parsed-time))
+         (matched (--find (s-matches? file-regexp it) (directory-files (denote-directory)))))
+    (if matched
+        (find-file (f-join denote-directory matched))
+      (journal-new date-string))))
 
 ;; Font and style
 
